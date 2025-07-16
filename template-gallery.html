@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PptxGenJS テンプレートギャラリー</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+        .template-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .template-category {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .category-title {
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+        .btn-demo {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-demo:hover {
+            background-color: #764ba2;
+            color: white;
+        }
+        .template-image {
+            height: 200px;
+            object-fit: cover;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #6c757d;
+        }
+        .code-preview {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">PptxGenJS テンプレートギャラリー</h1>
+            <p class="lead">さまざまなプレゼンテーションテンプレートを探索し、すぐに使用できます</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- チャートテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">📊 チャート</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📊
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">棒グラフ</h5>
+                            <p class="card-text">売上データや比較分析に最適な棒グラフテンプレート</p>
+                            <button class="btn btn-demo" onclick="generateChart('bar')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📈
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">折れ線グラフ</h5>
+                            <p class="card-text">時系列データやトレンド分析用の折れ線グラフ</p>
+                            <button class="btn btn-demo" onclick="generateChart('line')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🥧
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">円グラフ</h5>
+                            <p class="card-text">割合や構成を視覚化する円グラフ</p>
+                            <button class="btn btn-demo" onclick="generateChart('pie')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- テーブルテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">📋 テーブル</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📋
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">基本テーブル</h5>
+                            <p class="card-text">シンプルで見やすい基本的なテーブルレイアウト</p>
+                            <button class="btn btn-demo" onclick="generateTable('basic')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📊
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">スタイル付きテーブル</h5>
+                            <p class="card-text">色分けやフォーマットが適用されたテーブル</p>
+                            <button class="btn btn-demo" onclick="generateTable('styled')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📈
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">データテーブル</h5>
+                            <p class="card-text">大量のデータを整理して表示するテーブル</p>
+                            <button class="btn btn-demo" onclick="generateTable('data')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 画像・メディアテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">🖼️ 画像・メディア</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🖼️
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">画像ギャラリー</h5>
+                            <p class="card-text">複数の画像を美しく配置するギャラリーレイアウト</p>
+                            <button class="btn btn-demo" onclick="generateImage('gallery')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🎬
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">ビデオスライド</h5>
+                            <p class="card-text">動画を埋め込んだプレゼンテーション</p>
+                            <button class="btn btn-demo" onclick="generateMedia('video')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🎵
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">オーディオスライド</h5>
+                            <p class="card-text">音声ファイルを含むプレゼンテーション</p>
+                            <button class="btn btn-demo" onclick="generateMedia('audio')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- シェイプ・図形テンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">🔷 シェイプ・図形</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🔷
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">基本図形</h5>
+                            <p class="card-text">円、四角、三角などの基本的な図形</p>
+                            <button class="btn btn-demo" onclick="generateShape('basic')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📐
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">フローチャート</h5>
+                            <p class="card-text">プロセスや手順を示すフローチャート図形</p>
+                            <button class="btn btn-demo" onclick="generateShape('flowchart')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🎨
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">カスタム図形</h5>
+                            <p class="card-text">独自のデザインやパターンの図形</p>
+                            <button class="btn btn-demo" onclick="generateShape('custom')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- テキストテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">📝 テキスト</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📝
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">タイトルスライド</h5>
+                            <p class="card-text">インパクトのあるタイトルスライドのテンプレート</p>
+                            <button class="btn btn-demo" onclick="generateText('title')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📄
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">箇条書きリスト</h5>
+                            <p class="card-text">情報を整理して表示する箇条書きレイアウト</p>
+                            <button class="btn btn-demo" onclick="generateText('bullets')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            💬
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">引用文</h5>
+                            <p class="card-text">印象的な引用文を表示するテンプレート</p>
+                            <button class="btn btn-demo" onclick="generateText('quote')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- マスタースライドテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">🎨 マスタースライド</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🎨
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">ビジネステンプレート</h5>
+                            <p class="card-text">プロフェッショナルなビジネスプレゼン用マスター</p>
+                            <button class="btn btn-demo" onclick="generateMaster('business')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🎓
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">教育テンプレート</h5>
+                            <p class="card-text">授業や講義に適したアカデミックなマスター</p>
+                            <button class="btn btn-demo" onclick="generateMaster('education')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🌈
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">クリエイティブテンプレート</h5>
+                            <p class="card-text">カラフルで創造的なデザインのマスター</p>
+                            <button class="btn btn-demo" onclick="generateMaster('creative')">デモを生成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- コード表示エリア -->
+        <div class="template-category">
+            <h2 class="category-title">💻 コードプレビュー</h2>
+            <div id="codePreview" class="code-preview">
+                <p class="text-muted">ボタンをクリックしてコード例を表示</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PptxGenJS ライブラリ -->
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@latest/dist/pptxgen.bundle.js"></script>
+    
+    <script>
+        // チャート生成関数
+        function generateChart(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'bar':
+                    slide.addChart(pptx.ChartType.bar, [
+                        {
+                            name: '売上データ',
+                            labels: ['1月', '2月', '3月', '4月'],
+                            values: [1500, 2500, 2000, 3000]
+                        }
+                    ], {
+                        x: 1, y: 1, w: 8, h: 4,
+                        title: '月別売上グラフ'
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addChart(pptx.ChartType.bar, [
+    {
+        name: '売上データ',
+        labels: ['1月', '2月', '3月', '4月'],
+        values: [1500, 2500, 2000, 3000]
+    }
+], {
+    x: 1, y: 1, w: 8, h: 4,
+    title: '月別売上グラフ'
+});
+pptx.writeFile({ fileName: 'bar-chart.pptx' });`);
+                    break;
+                    
+                case 'line':
+                    slide.addChart(pptx.ChartType.line, [
+                        {
+                            name: 'トレンド',
+                            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                            values: [100, 150, 130, 180]
+                        }
+                    ], {
+                        x: 1, y: 1, w: 8, h: 4,
+                        title: '四半期トレンド'
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addChart(pptx.ChartType.line, [
+    {
+        name: 'トレンド',
+        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+        values: [100, 150, 130, 180]
+    }
+], {
+    x: 1, y: 1, w: 8, h: 4,
+    title: '四半期トレンド'
+});
+pptx.writeFile({ fileName: 'line-chart.pptx' });`);
+                    break;
+                    
+                case 'pie':
+                    slide.addChart(pptx.ChartType.pie, [
+                        {
+                            name: '市場シェア',
+                            labels: ['製品A', '製品B', '製品C', 'その他'],
+                            values: [35, 25, 20, 20]
+                        }
+                    ], {
+                        x: 1, y: 1, w: 6, h: 4,
+                        title: '市場シェア分析'
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addChart(pptx.ChartType.pie, [
+    {
+        name: '市場シェア',
+        labels: ['製品A', '製品B', '製品C', 'その他'],
+        values: [35, 25, 20, 20]
+    }
+], {
+    x: 1, y: 1, w: 6, h: 4,
+    title: '市場シェア分析'
+});
+pptx.writeFile({ fileName: 'pie-chart.pptx' });`);
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-chart-demo.pptx` });
+        }
+        
+        // テーブル生成関数
+        function generateTable(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'basic':
+                    slide.addTable([
+                        ['項目', '数値', '状態'],
+                        ['売上', '¥1,000,000', '達成'],
+                        ['コスト', '¥500,000', '予算内'],
+                        ['利益', '¥500,000', '良好']
+                    ], {
+                        x: 1, y: 1, w: 8, h: 3
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addTable([
+    ['項目', '数値', '状態'],
+    ['売上', '¥1,000,000', '達成'],
+    ['コスト', '¥500,000', '予算内'],
+    ['利益', '¥500,000', '良好']
+], {
+    x: 1, y: 1, w: 8, h: 3
+});
+pptx.writeFile({ fileName: 'basic-table.pptx' });`);
+                    break;
+                    
+                case 'styled':
+                    slide.addTable([
+                        [{ text: 'ヘッダー1', options: { fill: '363636', color: 'FFFFFF', bold: true } },
+                         { text: 'ヘッダー2', options: { fill: '363636', color: 'FFFFFF', bold: true } }],
+                        ['データ1', 'データ2'],
+                        ['データ3', 'データ4']
+                    ], {
+                        x: 1, y: 1, w: 8, h: 3,
+                        border: { pt: 1, color: 'CCCCCC' }
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addTable([
+    [{ text: 'ヘッダー1', options: { fill: '363636', color: 'FFFFFF', bold: true } },
+     { text: 'ヘッダー2', options: { fill: '363636', color: 'FFFFFF', bold: true } }],
+    ['データ1', 'データ2'],
+    ['データ3', 'データ4']
+], {
+    x: 1, y: 1, w: 8, h: 3,
+    border: { pt: 1, color: 'CCCCCC' }
+});
+pptx.writeFile({ fileName: 'styled-table.pptx' });`);
+                    break;
+                    
+                case 'data':
+                    let rows = [['ID', '名前', '部門', '売上']];
+                    for(let i = 1; i <= 10; i++) {
+                        rows.push([`00${i}`, `社員${i}`, `部門${i % 3 + 1}`, `¥${i * 100000}`]);
+                    }
+                    slide.addTable(rows, {
+                        x: 0.5, y: 0.5, w: 9, h: 5,
+                        fontSize: 10
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+let rows = [['ID', '名前', '部門', '売上']];
+for(let i = 1; i <= 10; i++) {
+    rows.push([\`00\${i}\`, \`社員\${i}\`, \`部門\${i % 3 + 1}\`, \`¥\${i * 100000}\`]);
+}
+slide.addTable(rows, {
+    x: 0.5, y: 0.5, w: 9, h: 5,
+    fontSize: 10
+});
+pptx.writeFile({ fileName: 'data-table.pptx' });`);
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-table-demo.pptx` });
+        }
+        
+        // 画像生成関数
+        function generateImage(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'gallery':
+                    // プレースホルダー画像を配置
+                    slide.addText('画像ギャラリーデモ', { x: 0.5, y: 0.5, w: 9, h: 0.5, fontSize: 24, bold: true });
+                    
+                    // 画像プレースホルダー
+                    for(let i = 0; i < 4; i++) {
+                        slide.addShape(pptx.ShapeType.rect, {
+                            x: 0.5 + (i % 2) * 4.5,
+                            y: 1.5 + Math.floor(i / 2) * 2.5,
+                            w: 4, h: 2,
+                            fill: 'CCCCCC'
+                        });
+                        slide.addText(`画像 ${i + 1}`, {
+                            x: 0.5 + (i % 2) * 4.5,
+                            y: 1.5 + Math.floor(i / 2) * 2.5,
+                            w: 4, h: 2,
+                            align: 'center',
+                            valign: 'middle'
+                        });
+                    }
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+// 実際の画像を使用する場合
+slide.addImage({ path: 'image1.jpg', x: 0.5, y: 1.5, w: 4, h: 2 });
+slide.addImage({ path: 'image2.jpg', x: 5, y: 1.5, w: 4, h: 2 });
+slide.addImage({ path: 'image3.jpg', x: 0.5, y: 4, w: 4, h: 2 });
+slide.addImage({ path: 'image4.jpg', x: 5, y: 4, w: 4, h: 2 });
+pptx.writeFile({ fileName: 'image-gallery.pptx' });`);
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-image-demo.pptx` });
+        }
+        
+        // メディア生成関数
+        function generateMedia(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'video':
+                    slide.addText('ビデオ埋め込みデモ', { x: 0.5, y: 0.5, fontSize: 24, bold: true });
+                    slide.addShape(pptx.ShapeType.rect, {
+                        x: 1, y: 1.5, w: 8, h: 4.5,
+                        fill: '000000'
+                    });
+                    slide.addText('▶ ビデオプレースホルダー', {
+                        x: 1, y: 1.5, w: 8, h: 4.5,
+                        color: 'FFFFFF',
+                        align: 'center',
+                        valign: 'middle',
+                        fontSize: 18
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addMedia({
+    type: 'video',
+    path: 'sample-video.mp4',
+    x: 1, y: 1.5, w: 8, h: 4.5
+});
+pptx.writeFile({ fileName: 'video-demo.pptx' });`);
+                    break;
+                    
+                case 'audio':
+                    slide.addText('オーディオ埋め込みデモ', { x: 0.5, y: 0.5, fontSize: 24, bold: true });
+                    slide.addShape(pptx.ShapeType.rect, {
+                        x: 3, y: 2, w: 4, h: 2,
+                        fill: '4472C4'
+                    });
+                    slide.addText('🎵 オーディオファイル', {
+                        x: 3, y: 2, w: 4, h: 2,
+                        color: 'FFFFFF',
+                        align: 'center',
+                        valign: 'middle',
+                        fontSize: 16
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addMedia({
+    type: 'audio',
+    path: 'sample-audio.mp3',
+    x: 3, y: 2, w: 4, h: 2
+});
+pptx.writeFile({ fileName: 'audio-demo.pptx' });`);
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-media-demo.pptx` });
+        }
+        
+        // シェイプ生成関数
+        function generateShape(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'basic':
+                    slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1, w: 2, h: 2, fill: 'FF0000' });
+                    slide.addShape(pptx.ShapeType.ellipse, { x: 4, y: 1, w: 2, h: 2, fill: '00FF00' });
+                    slide.addShape(pptx.ShapeType.triangle, { x: 7, y: 1, w: 2, h: 2, fill: '0000FF' });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1, w: 2, h: 2, fill: 'FF0000' });
+slide.addShape(pptx.ShapeType.ellipse, { x: 4, y: 1, w: 2, h: 2, fill: '00FF00' });
+slide.addShape(pptx.ShapeType.triangle, { x: 7, y: 1, w: 2, h: 2, fill: '0000FF' });
+pptx.writeFile({ fileName: 'basic-shapes.pptx' });`);
+                    break;
+                    
+                case 'flowchart':
+                    // プロセス
+                    slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1, w: 2, h: 1, fill: '4472C4' });
+                    slide.addText('開始', { x: 1, y: 1, w: 2, h: 1, align: 'center', valign: 'middle', color: 'FFFFFF' });
+                    
+                    // 矢印
+                    slide.addShape(pptx.ShapeType.line, { x: 3, y: 1.5, w: 1, h: 0, line: { color: '000000', width: 2 } });
+                    
+                    // 判断
+                    slide.addShape(pptx.ShapeType.diamond, { x: 4, y: 0.5, w: 2, h: 2, fill: 'FFC000' });
+                    slide.addText('条件', { x: 4, y: 0.5, w: 2, h: 2, align: 'center', valign: 'middle' });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+// プロセスボックス
+slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1, w: 2, h: 1, fill: '4472C4' });
+slide.addText('開始', { x: 1, y: 1, w: 2, h: 1, align: 'center', valign: 'middle', color: 'FFFFFF' });
+// 判断ボックス
+slide.addShape(pptx.ShapeType.diamond, { x: 4, y: 0.5, w: 2, h: 2, fill: 'FFC000' });
+slide.addText('条件', { x: 4, y: 0.5, w: 2, h: 2, align: 'center', valign: 'middle' });
+pptx.writeFile({ fileName: 'flowchart.pptx' });`);
+                    break;
+                    
+                case 'custom':
+                    // カスタム図形の組み合わせ
+                    slide.addShape(pptx.ShapeType.roundRect, { x: 2, y: 1, w: 6, h: 3, fill: 'E7E6E6', rectRadius: 0.2 });
+                    slide.addShape(pptx.ShapeType.star5, { x: 0.5, y: 0.5, w: 1, h: 1, fill: 'FFD700' });
+                    slide.addText('カスタムデザイン', { x: 2, y: 2, w: 6, h: 1, fontSize: 24, bold: true, align: 'center' });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addShape(pptx.ShapeType.roundRect, { x: 2, y: 1, w: 6, h: 3, fill: 'E7E6E6', rectRadius: 0.2 });
+slide.addShape(pptx.ShapeType.star5, { x: 0.5, y: 0.5, w: 1, h: 1, fill: 'FFD700' });
+slide.addText('カスタムデザイン', { x: 2, y: 2, w: 6, h: 1, fontSize: 24, bold: true, align: 'center' });
+pptx.writeFile({ fileName: 'custom-shapes.pptx' });`);
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-shape-demo.pptx` });
+        }
+        
+        // テキスト生成関数
+        function generateText(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'title':
+                    slide.addText('インパクトのあるタイトル', {
+                        x: 0.5, y: 1.5, w: 9, h: 2,
+                        fontSize: 48, bold: true,
+                        align: 'center',
+                        color: '363636'
+                    });
+                    slide.addText('サブタイトルやキャッチコピー', {
+                        x: 0.5, y: 3.5, w: 9, h: 1,
+                        fontSize: 24,
+                        align: 'center',
+                        color: '666666'
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addText('インパクトのあるタイトル', {
+    x: 0.5, y: 1.5, w: 9, h: 2,
+    fontSize: 48, bold: true,
+    align: 'center',
+    color: '363636'
+});
+slide.addText('サブタイトルやキャッチコピー', {
+    x: 0.5, y: 3.5, w: 9, h: 1,
+    fontSize: 24,
+    align: 'center',
+    color: '666666'
+});
+pptx.writeFile({ fileName: 'title-slide.pptx' });`);
+                    break;
+                    
+                case 'bullets':
+                    slide.addText('重要なポイント', { x: 0.5, y: 0.5, fontSize: 24, bold: true });
+                    slide.addText([
+                        { text: '• 最初のポイント', options: { bullet: true, indentLevel: 0 } },
+                        { text: '• 次のポイント', options: { bullet: true, indentLevel: 0 } },
+                        { text: '  ◦ サブポイント1', options: { bullet: true, indentLevel: 1 } },
+                        { text: '  ◦ サブポイント2', options: { bullet: true, indentLevel: 1 } },
+                        { text: '• 最後のポイント', options: { bullet: true, indentLevel: 0 } }
+                    ], {
+                        x: 0.5, y: 1.5, w: 9, h: 4,
+                        fontSize: 18,
+                        lineSpacing: 24
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addText('重要なポイント', { x: 0.5, y: 0.5, fontSize: 24, bold: true });
+slide.addText([
+    { text: '最初のポイント', options: { bullet: true, indentLevel: 0 } },
+    { text: '次のポイント', options: { bullet: true, indentLevel: 0 } },
+    { text: 'サブポイント1', options: { bullet: true, indentLevel: 1 } },
+    { text: 'サブポイント2', options: { bullet: true, indentLevel: 1 } },
+    { text: '最後のポイント', options: { bullet: true, indentLevel: 0 } }
+], {
+    x: 0.5, y: 1.5, w: 9, h: 4,
+    fontSize: 18
+});
+pptx.writeFile({ fileName: 'bullet-list.pptx' });`);
+                    break;
+                    
+                case 'quote':
+                    slide.addShape(pptx.ShapeType.rect, {
+                        x: 1, y: 1.5, w: 8, h: 3,
+                        fill: 'F5F5F5',
+                        line: { color: '4472C4', width: 3 }
+                    });
+                    slide.addText('"成功とは、失敗から失敗へと情熱を失わずに進む能力である"', {
+                        x: 1.5, y: 2, w: 7, h: 1.5,
+                        fontSize: 20,
+                        italic: true,
+                        align: 'center',
+                        valign: 'middle'
+                    });
+                    slide.addText('- ウィンストン・チャーチル', {
+                        x: 1.5, y: 3.5, w: 7, h: 0.5,
+                        fontSize: 16,
+                        align: 'right'
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addShape(pptx.ShapeType.rect, {
+    x: 1, y: 1.5, w: 8, h: 3,
+    fill: 'F5F5F5',
+    line: { color: '4472C4', width: 3 }
+});
+slide.addText('"成功とは、失敗から失敗へと情熱を失わずに進む能力である"', {
+    x: 1.5, y: 2, w: 7, h: 1.5,
+    fontSize: 20,
+    italic: true,
+    align: 'center',
+    valign: 'middle'
+});
+slide.addText('- ウィンストン・チャーチル', {
+    x: 1.5, y: 3.5, w: 7, h: 0.5,
+    fontSize: 16,
+    align: 'right'
+});
+pptx.writeFile({ fileName: 'quote-slide.pptx' });`);
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-text-demo.pptx` });
+        }
+        
+        // マスター生成関数
+        function generateMaster(type) {
+            let pptx = new PptxGenJS();
+            
+            switch(type) {
+                case 'business':
+                    pptx.defineSlideMaster({
+                        title: 'ビジネスマスター',
+                        background: { color: 'FFFFFF' },
+                        objects: [
+                            { rect: { x: 0, y: 0, w: '100%', h: 0.75, fill: '363636' } },
+                            { text: {
+                                text: 'ビジネスプレゼンテーション',
+                                options: { x: 0.5, y: 0.1, w: 5, h: 0.5, fontSize: 18, color: 'FFFFFF', bold: true }
+                            }},
+                            { text: {
+                                text: '©2024 会社名',
+                                options: { x: 7, y: 5.5, w: 3, h: 0.3, fontSize: 10, color: '666666', align: 'right' }
+                            }}
+                        ]
+                    });
+                    
+                    let slide = pptx.addSlide({ masterName: 'ビジネスマスター' });
+                    slide.addText('コンテンツをここに追加', { x: 1, y: 1, fontSize: 24 });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+pptx.defineSlideMaster({
+    title: 'ビジネスマスター',
+    background: { color: 'FFFFFF' },
+    objects: [
+        { rect: { x: 0, y: 0, w: '100%', h: 0.75, fill: '363636' } },
+        { text: {
+            text: 'ビジネスプレゼンテーション',
+            options: { x: 0.5, y: 0.1, w: 5, h: 0.5, fontSize: 18, color: 'FFFFFF', bold: true }
+        }}
+    ]
+});
+let slide = pptx.addSlide({ masterName: 'ビジネスマスター' });
+pptx.writeFile({ fileName: 'business-master.pptx' });`);
+                    break;
+                    
+                case 'education':
+                    pptx.defineSlideMaster({
+                        title: '教育マスター',
+                        background: { color: 'F0F8FF' },
+                        objects: [
+                            { rect: { x: 0, y: 0, w: '100%', h: 1, fill: '4169E1' } },
+                            { text: {
+                                text: '授業タイトル',
+                                options: { x: 0.5, y: 0.2, w: 9, h: 0.6, fontSize: 24, color: 'FFFFFF', bold: true }
+                            }},
+                            { line: { x: 0.5, y: 5.3, w: 9, h: 0, line: { color: '4169E1', width: 2 } } }
+                        ]
+                    });
+                    
+                    let eduSlide = pptx.addSlide({ masterName: '教育マスター' });
+                    eduSlide.addText('学習内容', { x: 1, y: 1.5, fontSize: 20 });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+pptx.defineSlideMaster({
+    title: '教育マスター',
+    background: { color: 'F0F8FF' },
+    objects: [
+        { rect: { x: 0, y: 0, w: '100%', h: 1, fill: '4169E1' } },
+        { text: {
+            text: '授業タイトル',
+            options: { x: 0.5, y: 0.2, w: 9, h: 0.6, fontSize: 24, color: 'FFFFFF', bold: true }
+        }}
+    ]
+});
+let slide = pptx.addSlide({ masterName: '教育マスター' });
+pptx.writeFile({ fileName: 'education-master.pptx' });`);
+                    break;
+                    
+                case 'creative':
+                    pptx.defineSlideMaster({
+                        title: 'クリエイティブマスター',
+                        background: { 
+                            fill: {
+                                type: 'gradient',
+                                colors: [
+                                    { color: 'FF6B6B', position: 0 },
+                                    { color: '4ECDC4', position: 100 }
+                                ]
+                            }
+                        },
+                        objects: [
+                            { shape: {
+                                type: pptx.ShapeType.ellipse,
+                                options: { x: -1, y: -1, w: 3, h: 3, fill: 'FFFFFF', alpha: 20 }
+                            }},
+                            { shape: {
+                                type: pptx.ShapeType.ellipse,
+                                options: { x: 8, y: 4, w: 3, h: 3, fill: 'FFFFFF', alpha: 20 }
+                            }}
+                        ]
+                    });
+                    
+                    let creativeSlide = pptx.addSlide({ masterName: 'クリエイティブマスター' });
+                    creativeSlide.addText('創造的なコンテンツ', { x: 1, y: 2, fontSize: 32, color: 'FFFFFF', bold: true });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+pptx.defineSlideMaster({
+    title: 'クリエイティブマスター',
+    background: { 
+        fill: {
+            type: 'gradient',
+            colors: [
+                { color: 'FF6B6B', position: 0 },
+                { color: '4ECDC4', position: 100 }
+            ]
+        }
+    }
+});
+let slide = pptx.addSlide({ masterName: 'クリエイティブマスター' });
+pptx.writeFile({ fileName: 'creative-master.pptx' });`);
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-master-demo.pptx` });
+        }
+        
+        // コード表示関数
+        function showCode(code) {
+            document.getElementById('codePreview').innerHTML = `<pre>${code}</pre>`;
+        }
+    </script>
+</body>
+</html>
