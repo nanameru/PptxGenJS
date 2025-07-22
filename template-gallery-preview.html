@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PptxGenJS テンプレートギャラリー with プレビュー</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+        .template-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .template-category {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .category-title {
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+        .btn-demo {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+            margin-right: 0.5rem;
+        }
+        .btn-demo:hover {
+            background-color: #764ba2;
+            color: white;
+        }
+        .btn-preview {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-preview:hover {
+            background-color: #218838;
+            color: white;
+        }
+        .template-image {
+            height: 200px;
+            object-fit: cover;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #6c757d;
+        }
+        .code-preview {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        /* プレビューモーダルのスタイル */
+        .slide-preview-container {
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide-preview {
+            background-color: white;
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slide-content {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .modal-xl {
+            max-width: 90%;
+        }
+        
+        /* チャートプレビューのスタイル */
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+        }
+        
+        /* テーブルプレビューのスタイル */
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .preview-table th,
+        .preview-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .preview-table th {
+            background-color: #363636;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* シェイププレビューのスタイル */
+        .shape-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 200px;
+            margin: 20px 0;
+        }
+        
+        .shape {
+            transition: transform 0.3s;
+        }
+        
+        .shape:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">PptxGenJS テンプレートギャラリー</h1>
+            <p class="lead">スライドをWebでプレビューしてからダウンロード</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- チャートテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">📊 チャート</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📊
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">棒グラフ</h5>
+                            <p class="card-text">売上データや比較分析に最適な棒グラフテンプレート</p>
+                            <button class="btn btn-preview" onclick="previewChart('bar')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateChart('bar')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📈
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">折れ線グラフ</h5>
+                            <p class="card-text">時系列データやトレンド分析用の折れ線グラフ</p>
+                            <button class="btn btn-preview" onclick="previewChart('line')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateChart('line')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🥧
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">円グラフ</h5>
+                            <p class="card-text">割合や構成を視覚化する円グラフ</p>
+                            <button class="btn btn-preview" onclick="previewChart('pie')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateChart('pie')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- テーブルテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">📋 テーブル</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📋
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">基本テーブル</h5>
+                            <p class="card-text">シンプルで見やすい基本的なテーブルレイアウト</p>
+                            <button class="btn btn-preview" onclick="previewTable('basic')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateTable('basic')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📊
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">スタイル付きテーブル</h5>
+                            <p class="card-text">色分けやフォーマットが適用されたテーブル</p>
+                            <button class="btn btn-preview" onclick="previewTable('styled')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateTable('styled')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📈
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">データテーブル</h5>
+                            <p class="card-text">大量のデータを整理して表示するテーブル</p>
+                            <button class="btn btn-preview" onclick="previewTable('data')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateTable('data')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📝
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">評価と課題</h5>
+                            <p class="card-text">項目ごとの評価と課題をまとめたレポート用テーブル</p>
+                            <button class="btn btn-preview" onclick="previewTable('evaluation')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateTable('evaluation')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- シェイプ・図形テンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">🔷 シェイプ・図形</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🔷
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">基本図形</h5>
+                            <p class="card-text">円、四角、三角などの基本的な図形</p>
+                            <button class="btn btn-preview" onclick="previewShape('basic')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateShape('basic')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📐
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">フローチャート</h5>
+                            <p class="card-text">プロセスや手順を示すフローチャート図形</p>
+                            <button class="btn btn-preview" onclick="previewShape('flowchart')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateShape('flowchart')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🎨
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">カスタム図形</h5>
+                            <p class="card-text">独自のデザインやパターンの図形</p>
+                            <button class="btn btn-preview" onclick="previewShape('custom')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateShape('custom')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- テキストテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">📝 テキスト</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📝
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">タイトルスライド</h5>
+                            <p class="card-text">インパクトのあるタイトルスライドのテンプレート</p>
+                            <button class="btn btn-preview" onclick="previewText('title')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateText('title')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📄
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">箇条書きリスト</h5>
+                            <p class="card-text">情報を整理して表示する箇条書きレイアウト</p>
+                            <button class="btn btn-preview" onclick="previewText('bullets')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateText('bullets')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            💬
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">引用文</h5>
+                            <p class="card-text">印象的な引用文を表示するテンプレート</p>
+                            <button class="btn btn-preview" onclick="previewText('quote')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateText('quote')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AIプレゼンテーションテンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">🤖 AIプレゼンテーション</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🤖
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">AIが拓く未来</h5>
+                            <p class="card-text">AIをテーマにした包括的なプレゼンテーション（5スライド構成）</p>
+                            <button class="btn btn-preview" onclick="previewAI('future')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateAI('future')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🌟
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">技術革新と社会変革</h5>
+                            <p class="card-text">AI技術の現在と未来を分析するテンプレート</p>
+                            <button class="btn btn-preview" onclick="previewAI('innovation')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateAI('innovation')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- コード表示エリア -->
+        <div class="template-category">
+            <h2 class="category-title">💻 コードプレビュー</h2>
+            <div id="codePreview" class="code-preview">
+                <p class="text-muted">ボタンをクリックしてコード例を表示</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- プレビューモーダル -->
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewModalLabel">スライドプレビュー</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="slide-preview-container">
+                        <div class="slide-preview">
+                            <div id="slideContent" class="slide-content">
+                                <!-- プレビューコンテンツがここに表示されます -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-navigation">
+                        <button class="btn btn-secondary" onclick="previousSlide()" id="prevBtn">前へ</button>
+                        <span id="slideIndicator">1 / 1</span>
+                        <button class="btn btn-secondary" onclick="nextSlide()" id="nextBtn">次へ</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                    <button type="button" class="btn btn-primary" id="downloadBtn">ダウンロード</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js for chart previews -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- PptxGenJS ライブラリ -->
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@latest/dist/pptxgen.bundle.js"></script>
+    
+    <script>
+        let currentSlides = [];
+        let currentSlideIndex = 0;
+        let currentType = '';
+        let currentSubType = '';
+        
+        // プレビューモーダルを表示
+        function showPreviewModal(title) {
+            document.getElementById('previewModalLabel').textContent = title;
+            const modal = new bootstrap.Modal(document.getElementById('previewModal'));
+            modal.show();
+        }
+        
+        // チャートプレビュー関数
+        function previewChart(type) {
+            currentType = 'chart';
+            currentSubType = type;
+            currentSlides = [];
+            
+            switch(type) {
+                case 'bar':
+                    currentSlides.push({
+                        title: '月別売上グラフ',
+                        content: `
+                            <h2 class="mb-4">月別売上グラフ</h2>
+                            <div class="chart-container">
+                                <canvas id="barChart"></canvas>
+                            </div>
+                        `,
+                        init: () => {
+                            const ctx = document.getElementById('barChart').getContext('2d');
+                            new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: ['1月', '2月', '3月', '4月'],
+                                    datasets: [{
+                                        label: '売上データ',
+                                        data: [1500, 2500, 2000, 3000],
+                                        backgroundColor: '#4472C4'
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false
+                                }
+                            });
+                        }
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addChart(pptx.ChartType.bar, [
+    {
+        name: '売上データ',
+        labels: ['1月', '2月', '3月', '4月'],
+        values: [1500, 2500, 2000, 3000]
+    }
+], {
+    x: 1, y: 1, w: 8, h: 4,
+    title: '月別売上グラフ'
+});
+pptx.writeFile({ fileName: 'bar-chart.pptx' });`);
+                    break;
+                    
+                case 'line':
+                    currentSlides.push({
+                        title: '四半期トレンド',
+                        content: `
+                            <h2 class="mb-4">四半期トレンド</h2>
+                            <div class="chart-container">
+                                <canvas id="lineChart"></canvas>
+                            </div>
+                        `,
+                        init: () => {
+                            const ctx = document.getElementById('lineChart').getContext('2d');
+                            new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                                    datasets: [{
+                                        label: 'トレンド',
+                                        data: [100, 150, 130, 180],
+                                        borderColor: '#4472C4',
+                                        tension: 0.1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false
+                                }
+                            });
+                        }
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addChart(pptx.ChartType.line, [
+    {
+        name: 'トレンド',
+        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+        values: [100, 150, 130, 180]
+    }
+], {
+    x: 1, y: 1, w: 8, h: 4,
+    title: '四半期トレンド'
+});
+pptx.writeFile({ fileName: 'line-chart.pptx' });`);
+                    break;
+                    
+                case 'pie':
+                    currentSlides.push({
+                        title: '市場シェア分析',
+                        content: `
+                            <h2 class="mb-4">市場シェア分析</h2>
+                            <div class="chart-container">
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                        `,
+                        init: () => {
+                            const ctx = document.getElementById('pieChart').getContext('2d');
+                            new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: ['製品A', '製品B', '製品C', 'その他'],
+                                    datasets: [{
+                                        data: [35, 25, 20, 20],
+                                        backgroundColor: ['#4472C4', '#ED7D31', '#A5A5A5', '#FFC000']
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false
+                                }
+                            });
+                        }
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addChart(pptx.ChartType.pie, [
+    {
+        name: '市場シェア',
+        labels: ['製品A', '製品B', '製品C', 'その他'],
+        values: [35, 25, 20, 20]
+    }
+], {
+    x: 1, y: 1, w: 6, h: 4,
+    title: '市場シェア分析'
+});
+pptx.writeFile({ fileName: 'pie-chart.pptx' });`);
+                    break;
+            }
+            
+            currentSlideIndex = 0;
+            updateSlide();
+            showPreviewModal(`チャートプレビュー - ${type}`);
+        }
+        
+        // テーブルプレビュー関数
+        function previewTable(type) {
+            currentType = 'table';
+            currentSubType = type;
+            currentSlides = [];
+            
+            switch(type) {
+                case 'basic':
+                    currentSlides.push({
+                        title: '基本テーブル',
+                        content: `
+                            <h2 class="mb-4">基本テーブル</h2>
+                            <table class="preview-table">
+                                <tr>
+                                    <th>項目</th>
+                                    <th>数値</th>
+                                    <th>状態</th>
+                                </tr>
+                                <tr>
+                                    <td>売上</td>
+                                    <td>¥1,000,000</td>
+                                    <td>達成</td>
+                                </tr>
+                                <tr>
+                                    <td>コスト</td>
+                                    <td>¥500,000</td>
+                                    <td>予算内</td>
+                                </tr>
+                                <tr>
+                                    <td>利益</td>
+                                    <td>¥500,000</td>
+                                    <td>良好</td>
+                                </tr>
+                            </table>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addTable([
+    ['項目', '数値', '状態'],
+    ['売上', '¥1,000,000', '達成'],
+    ['コスト', '¥500,000', '予算内'],
+    ['利益', '¥500,000', '良好']
+], {
+    x: 1, y: 1, w: 8, h: 3
+});
+pptx.writeFile({ fileName: 'basic-table.pptx' });`);
+                    break;
+                    
+                case 'styled':
+                    currentSlides.push({
+                        title: 'スタイル付きテーブル',
+                        content: `
+                            <h2 class="mb-4">スタイル付きテーブル</h2>
+                            <table class="preview-table">
+                                <tr>
+                                    <th style="background-color: #363636; color: white;">ヘッダー1</th>
+                                    <th style="background-color: #363636; color: white;">ヘッダー2</th>
+                                </tr>
+                                <tr>
+                                    <td>データ1</td>
+                                    <td>データ2</td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #f0f0f0;">データ3</td>
+                                    <td style="background-color: #f0f0f0;">データ4</td>
+                                </tr>
+                            </table>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addTable([
+    [{ text: 'ヘッダー1', options: { fill: '363636', color: 'FFFFFF', bold: true } },
+     { text: 'ヘッダー2', options: { fill: '363636', color: 'FFFFFF', bold: true } }],
+    ['データ1', 'データ2'],
+    ['データ3', 'データ4']
+], {
+    x: 1, y: 1, w: 8, h: 3,
+    border: { pt: 1, color: 'CCCCCC' }
+});
+pptx.writeFile({ fileName: 'styled-table.pptx' });`);
+                    break;
+                    
+                case 'data':
+                    let rows = '<tr><th>ID</th><th>名前</th><th>部門</th><th>売上</th></tr>';
+                    for(let i = 1; i <= 10; i++) {
+                        rows += `<tr><td>00${i}</td><td>社員${i}</td><td>部門${i % 3 + 1}</td><td>¥${i * 100000}</td></tr>`;
+                    }
+                    currentSlides.push({
+                        title: 'データテーブル',
+                        content: `
+                            <h2 class="mb-4">データテーブル</h2>
+                            <div style="overflow-y: auto; max-height: 300px;">
+                                <table class="preview-table">
+                                    ${rows}
+                                </table>
+                            </div>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+let rows = [['ID', '名前', '部門', '売上']];
+for(let i = 1; i <= 10; i++) {
+    rows.push([\`00\${i}\`, \`社員\${i}\`, \`部門\${i % 3 + 1}\`, \`¥\${i * 100000}\`]);
+}
+slide.addTable(rows, {
+    x: 0.5, y: 0.5, w: 9, h: 5,
+    fontSize: 10
+});
+pptx.writeFile({ fileName: 'data-table.pptx' });`);
+                    break;
+                case 'evaluation':
+                    currentSlides.push({
+                        title: '評価と課題',
+                        content: `
+                            <div style="padding: 20px;">
+                                <h2 style="font-size: 1.6rem; font-weight: bold;">4-1. 定性評価</h2>
+                                <h3 style="font-size: 1.2rem; font-weight: bold; margin-top: 1rem;">実施事項に対する評価と課題</h3>
+                                <p style="font-size: 0.9rem; margin-top: 1rem;">各項目について一定の成果は得られたものの、サービス利用の拡大とデータ収集、利活用の促進に向け、抽出された課題への対応を検討し、今後実施していく方針です。</p>
+                                <table class="preview-table" style="font-size: 0.75rem; margin-top: 1.5rem;">
+                                    <thead>
+                                        <tr>
+                                            <th style="background-color: #92D050; color: #333; width: 15%;">項目</th>
+                                            <th style="background-color: #92D050; color: #333; width: 25%;">評価</th>
+                                            <th style="background-color: #92D050; color: #333; width: 60%;">課題</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="2" style="background-color: #E2EFDA; text-align: center; font-weight: bold; vertical-align: middle;">匿名加工情報<br>の収集</td>
+                                            <td rowspan="2" style="background-color: #F8F9FA; vertical-align: middle;">匿名加工情報による収集追加により、データ数は増加</td>
+                                            <td style="background-color: #F8F9FA;"><strong>匿名加工方法の見直し・更新</strong><br>・有識者の助言のもと適法に定義済み<br>・ただし今後、データ利活用時に組み合わせる情報により個人が特定される恐れもあり都度データ粒度の精査、検討等が必要</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color: #F8F9FA;"><strong>加工事業者の分離</strong><br>・匿名加工処理者とデータ利用者が同一事業者となる点は、業務環境を完全に分離し、それぞれ専任の担当者を配置する等の運用対応により問題なしとしたものの、運用体制の変更等の際には都度チェックが必要</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2" style="background-color: #E2EFDA; text-align: center; font-weight: bold; vertical-align: middle;">分析機能<br>の提供</td>
+                                            <td rowspan="2" style="background-color: #F8F9FA; vertical-align: middle;">概況を端的に把握可能なダッシュボードでのレポーティングを実施</td>
+                                            <td style="background-color: #F8F9FA;"><strong>利用増の対策検討</strong><br>・利用件数を増加させる施策の検討が必要(レポートの改善、簡易な集計画面の提供等)検討が必要</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color: #F8F9FA;"><strong>データ利活用の高度化検討</strong><br>・テキストデータの分析、AIの利用等、高度な分析実施に向けたデータ整備と実施方法の検討が必要</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2" style="background-color: #E2EFDA; text-align: center; font-weight: bold; vertical-align: middle;">決済機能<br>の提供</td>
+                                            <td rowspan="2" style="background-color: #F8F9FA; vertical-align: middle;">2地域でそれぞれ決済サービスの提供体制、運用スキームを構築、実証し、示唆を収集</td>
+                                            <td style="background-color: #F8F9FA;"><strong>導入店舗数の拡大</strong><br>・店舗数の拡大に向け、導入の抵抗となる店舗端末の用意、決済手数料、運用費に対し、導入メリットの提示等、対応策の検討が必要</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color: #F8F9FA;"><strong>ユーザ利用の拡大</strong><br>・ユーザへのプロモーション、利用メリット、インセンティブの提示等、認知度の向上と利用促進策の検討、実施が必要</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2" style="background-color: #E2EFDA; text-align: center; font-weight: bold; vertical-align: middle;">海外法令の<br>調査と対応</td>
+                                            <td rowspan="2" style="background-color: #F8F9FA; vertical-align: middle;">最新動向を把握し、有識者のアドバイスのもと対応を実施</td>
+                                            <td style="background-color: #F8F9FA;"><strong>EEA国籍ユーザデータの扱い</strong><br>・現状、一律破棄としているEEA国籍ユーザのデータについて、サービス利用位置やデータ連携時の位置情報をもとに破棄の判断を実施する仕組みの検討、構築</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color: #F8F9FA;"><strong>ePrivacy規則への対応</strong><br>・協議検討中のePrivacy規則について、施行され次第早急に対応が可能なよう、今後の動向注視を継続し、対応を整理</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div style="text-align: right; font-size: 0.8rem; margin-top: 10px; color: #666;">33</div>
+                            </div>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+
+slide.addText("4-1. 定性評価", { x: 0.5, y: 0.25, w: "90%", h: 0.5, fontSize: 32, bold: true });
+slide.addText("実施事項に対する評価と課題", { x: 0.5, y: 0.75, w: "90%", h: 0.5, fontSize: 24, bold: true });
+slide.addText("各項目について一定の成果は得られたものの、サービス利用の拡大とデータ収集、利活用の促進に向け、抽出された課題への対応を検討し、今後実施していく方針です。", { x: 0.5, y: 1.5, w: "90%", h: 0.6, fontSize: 14 });
+
+const commonCellOpts = { border: { type: 'solid', pt: 1, color: 'CCCCCC' }, valign: 'middle', fontSize: 12 };
+const headerOpts = { ...commonCellOpts, fill: { color: '92D050' }, color: '333333', bold: true, align: 'center', fontSize: 14 };
+const itemCellOpts = { ...commonCellOpts, fill: { color: 'E2EFDA' }, align: 'center' };
+const evalCellOpts = { ...commonCellOpts, fill: { color: 'E2EFDA' } };
+
+const tableData = [
+  [{ text: "項目", options: headerOpts }, { text: "評価", options: headerOpts }, { text: "課題", options: headerOpts }],
+  [
+    { text: "匿名加工情報\\nの収集", options: { ...itemCellOpts, rowspan: 2 } },
+    { text: "匿名加工情報による収集追加により、データ数は増加", options: { ...evalCellOpts, rowspan: 2 } },
+    { text: [{ text: '匿名加工方法の見直し・更新', options: { bold: true } }, { text: '\\n・有識者の助言のもと適法に定義済み', options: { breakLine: true } }, { text: '\\n・ただし今後、データ利活用時に組み合わせる情報により個人が特定される恐れもあり都度データ粒度の精査、検討等が必要', options: { breakLine: true } }], options: commonCellOpts },
+  ],
+  [ { text: [{ text: '加工事業者の分離', options: { bold: true } }, { text: '\\n・匿名加工処理者とデータ利用者が同一事業者となる点は、業務環境を完全に分離し、それぞれ専任の担当者を配置する等の運用対応により問題なしとしたものの、運用体制の変更等の際には都度チェックが必要', options: { breakLine: true } }], options: commonCellOpts } ],
+  [
+    { text: "分析機能\\nの提供", options: { ...itemCellOpts, rowspan: 2 } },
+    { text: "概況を端的に把握可能なダッシュボードでのレポーティングを実施", options: { ...evalCellOpts, rowspan: 2 } },
+    { text: [{ text: '利用増の対策検討', options: { bold: true } }, { text: '\\n・利用件数を増加させる施策の検討が必要(レポートの改善、簡易な集計画面の提供等)検討が必要', options: { breakLine: true } }], options: commonCellOpts },
+  ],
+  [ { text: [{ text: 'データ利活用の高度化検討', options: { bold: true } }, { text: '\\n・テキストデータの分析、AIの利用等、高度な分析実施に向けたデータ整備と実施方法の検討が必要', options: { breakLine: true } }], options: commonCellOpts } ],
+  [
+    { text: "決済機能\\nの提供", options: { ...itemCellOpts, rowspan: 2 } },
+    { text: "2地域でそれぞれ決済サービスの提供体制、運用スキームを構築、実証し、示唆を収集", options: { ...evalCellOpts, rowspan: 2 } },
+    { text: [{ text: '導入店舗数の拡大', options: { bold: true } }, { text: '\\n・店舗数の拡大に向け、導入の抵抗となる店舗端末の用意、決済手数料、運用費に対し、導入メリットの提示等、対応策の検討が必要', options: { breakLine: true } }], options: commonCellOpts },
+  ],
+  [ { text: [{ text: 'ユーザ利用の拡大', options: { bold: true } }, { text: '\\n・ユーザへのプロモーション、利用メリット、インセンティブの提示等、認知度の向上と利用促進策の検討、実施が必要', options: { breakLine: true } }], options: commonCellOpts } ],
+  [
+    { text: "海外法令の\\n調査と対応", options: { ...itemCellOpts, rowspan: 2 } },
+    { text: "最新動向を把握し、有識者のアドバイスのもと対応を実施", options: { ...evalCellOpts, rowspan: 2 } },
+    { text: [{ text: 'EEA国籍ユーザデータの扱い', options: { bold: true } }, { text: '\\n・現状、一律破棄としているEEA国籍ユーザのデータについて、サービス利用位置やデータ連携時の位置情報をもとに破棄の判断を実施する仕組みの検討、構築', options: { breakLine: true } }], options: commonCellOpts },
+  ],
+  [ { text: [{ text: 'ePrivacy規則への対応', options: { bold: true } }, { text: '\\n・協議検討中のePrivacy規則について、施行され次第早急に対応が可能なよう、今後の動向注視を継続し、対応を整理', options: { breakLine: true } }], options: commonCellOpts } ]
+];
+
+slide.addTable(tableData, { x: 0.5, y: 2.3, w: 9.0, colW: [1.5, 2.5, 5.0] });
+slide.addText('33', { x: 9.2, y: 7.1, w: 0.5, h: 0.3, align: 'right', fontSize: 10 });
+
+pptx.writeFile({ fileName: 'Evaluation_Slide.pptx' });`);
+                    break;
+            }
+            
+            currentSlideIndex = 0;
+            updateSlide();
+            showPreviewModal(`テーブルプレビュー - ${type}`);
+        }
+        
+        // シェイププレビュー関数
+        function previewShape(type) {
+            currentType = 'shape';
+            currentSubType = type;
+            currentSlides = [];
+            
+            switch(type) {
+                case 'basic':
+                    currentSlides.push({
+                        title: '基本図形',
+                        content: `
+                            <h2 class="mb-4">基本図形</h2>
+                            <div class="shape-container">
+                                <svg width="150" height="150" class="shape">
+                                    <rect x="25" y="25" width="100" height="100" fill="#FF0000"/>
+                                </svg>
+                                <svg width="150" height="150" class="shape">
+                                    <circle cx="75" cy="75" r="50" fill="#00FF00"/>
+                                </svg>
+                                <svg width="150" height="150" class="shape">
+                                    <polygon points="75,25 125,125 25,125" fill="#0000FF"/>
+                                </svg>
+                            </div>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1, w: 2, h: 2, fill: 'FF0000' });
+slide.addShape(pptx.ShapeType.ellipse, { x: 4, y: 1, w: 2, h: 2, fill: '00FF00' });
+slide.addShape(pptx.ShapeType.triangle, { x: 7, y: 1, w: 2, h: 2, fill: '0000FF' });
+pptx.writeFile({ fileName: 'basic-shapes.pptx' });`);
+                    break;
+                    
+                case 'flowchart':
+                    currentSlides.push({
+                        title: 'フローチャート',
+                        content: `
+                            <h2 class="mb-4">フローチャート</h2>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+                                <div style="background: #4472C4; color: white; padding: 20px 40px; border-radius: 5px;">
+                                    開始
+                                </div>
+                                <div style="font-size: 30px;">→</div>
+                                <div style="background: #FFC000; padding: 20px 40px; transform: rotate(45deg);">
+                                    <div style="transform: rotate(-45deg);">条件</div>
+                                </div>
+                                <div style="font-size: 30px;">→</div>
+                                <div style="background: #70AD47; color: white; padding: 20px 40px; border-radius: 5px;">
+                                    終了
+                                </div>
+                            </div>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+// プロセスボックス
+slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1, w: 2, h: 1, fill: '4472C4' });
+slide.addText('開始', { x: 1, y: 1, w: 2, h: 1, align: 'center', valign: 'middle', color: 'FFFFFF' });
+// 判断ボックス
+slide.addShape(pptx.ShapeType.diamond, { x: 4, y: 0.5, w: 2, h: 2, fill: 'FFC000' });
+slide.addText('条件', { x: 4, y: 0.5, w: 2, h: 2, align: 'center', valign: 'middle' });
+pptx.writeFile({ fileName: 'flowchart.pptx' });`);
+                    break;
+                    
+                case 'custom':
+                    currentSlides.push({
+                        title: 'カスタムデザイン',
+                        content: `
+                            <h2 class="mb-4">カスタムデザイン</h2>
+                            <div style="position: relative; height: 300px;">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #E7E6E6; padding: 40px 100px; border-radius: 20px;">
+                                    <h3 style="margin: 0;">カスタムデザイン</h3>
+                                </div>
+                                <svg width="100" height="100" style="position: absolute; top: 20px; left: 20px;">
+                                    <polygon points="50,15 61,35 82,35 67,50 73,71 50,57 27,71 33,50 18,35 39,35" fill="#FFD700"/>
+                                </svg>
+                            </div>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addShape(pptx.ShapeType.roundRect, { x: 2, y: 1, w: 6, h: 3, fill: 'E7E6E6', rectRadius: 0.2 });
+slide.addShape(pptx.ShapeType.star5, { x: 0.5, y: 0.5, w: 1, h: 1, fill: 'FFD700' });
+slide.addText('カスタムデザイン', { x: 2, y: 2, w: 6, h: 1, fontSize: 24, bold: true, align: 'center' });
+pptx.writeFile({ fileName: 'custom-shapes.pptx' });`);
+                    break;
+            }
+            
+            currentSlideIndex = 0;
+            updateSlide();
+            showPreviewModal(`シェイププレビュー - ${type}`);
+        }
+        
+        // テキストプレビュー関数
+        function previewText(type) {
+            currentType = 'text';
+            currentSubType = type;
+            currentSlides = [];
+            
+            switch(type) {
+                case 'title':
+                    currentSlides.push({
+                        title: 'タイトルスライド',
+                        content: `
+                            <div style="text-align: center; margin-top: 80px;">
+                                <h1 style="font-size: 48px; font-weight: bold; color: #363636; margin-bottom: 30px;">
+                                    インパクトのあるタイトル
+                                </h1>
+                                <h2 style="font-size: 24px; color: #666666;">
+                                    サブタイトルやキャッチコピー
+                                </h2>
+                            </div>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addText('インパクトのあるタイトル', {
+    x: 0.5, y: 1.5, w: 9, h: 2,
+    fontSize: 48, bold: true,
+    align: 'center',
+    color: '363636'
+});
+slide.addText('サブタイトルやキャッチコピー', {
+    x: 0.5, y: 3.5, w: 9, h: 1,
+    fontSize: 24,
+    align: 'center',
+    color: '666666'
+});
+pptx.writeFile({ fileName: 'title-slide.pptx' });`);
+                    break;
+                    
+                case 'bullets':
+                    currentSlides.push({
+                        title: '箇条書きリスト',
+                        content: `
+                            <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 30px;">重要なポイント</h2>
+                            <ul style="font-size: 18px; line-height: 1.8;">
+                                <li>最初のポイント</li>
+                                <li>次のポイント
+                                    <ul>
+                                        <li>サブポイント1</li>
+                                        <li>サブポイント2</li>
+                                    </ul>
+                                </li>
+                                <li>最後のポイント</li>
+                            </ul>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addText('重要なポイント', { x: 0.5, y: 0.5, fontSize: 24, bold: true });
+slide.addText([
+    { text: '• 最初のポイント', options: { bullet: true, indentLevel: 0 } },
+    { text: '• 次のポイント', options: { bullet: true, indentLevel: 0 } },
+    { text: '  ◦ サブポイント1', options: { bullet: true, indentLevel: 1 } },
+    { text: '  ◦ サブポイント2', options: { bullet: true, indentLevel: 1 } },
+    { text: '• 最後のポイント', options: { bullet: true, indentLevel: 0 } }
+], {
+    x: 0.5, y: 1.5, w: 9, h: 4,
+    fontSize: 18
+});
+pptx.writeFile({ fileName: 'bullet-list.pptx' });`);
+                    break;
+                    
+                case 'quote':
+                    currentSlides.push({
+                        title: '引用文',
+                        content: `
+                            <div style="background: #F5F5F5; border-left: 5px solid #4472C4; padding: 40px; margin: 40px 20px;">
+                                <p style="font-size: 20px; font-style: italic; text-align: center; margin-bottom: 20px;">
+                                    "成功とは、失敗から失敗へと情熱を失わずに進む能力である"
+                                </p>
+                                <p style="text-align: right; font-size: 16px; color: #666;">
+                                    - ウィンストン・チャーチル
+                                </p>
+                            </div>
+                        `
+                    });
+                    showCode(`let pptx = new PptxGenJS();
+let slide = pptx.addSlide();
+slide.addShape(pptx.ShapeType.rect, {
+    x: 1, y: 1.5, w: 8, h: 3,
+    fill: 'F5F5F5',
+    line: { color: '4472C4', width: 3 }
+});
+slide.addText('"成功とは、失敗から失敗へと情熱を失わずに進む能力である"', {
+    x: 1.5, y: 2, w: 7, h: 1.5,
+    fontSize: 20,
+    italic: true,
+    align: 'center',
+    valign: 'middle'
+});
+slide.addText('- ウィンストン・チャーチル', {
+    x: 1.5, y: 3.5, w: 7, h: 0.5,
+    fontSize: 16,
+    align: 'right'
+});
+pptx.writeFile({ fileName: 'quote-slide.pptx' });`);
+                    break;
+            }
+            
+            currentSlideIndex = 0;
+            updateSlide();
+            showPreviewModal(`テキストプレビュー - ${type}`);
+        }
+        
+        // AIプレゼンテーションプレビュー関数
+        function previewAI(type) {
+            currentType = 'ai';
+            currentSubType = type;
+            currentSlides = [];
+            
+            switch(type) {
+                case 'future':
+                    // スライド1: タイトルスライド
+                    currentSlides.push({
+                        title: 'AIが拓く未来へようこそ',
+                        content: `
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%; position: relative; display: flex; align-items: center; justify-content: center;">
+                                <div style="color: white; text-align: center;">
+                                    <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">AIが拓く未来へようこそ</h1>
+                                    <p style="font-size: 24px;">テクノロジーがもたらす変革と可能性</p>
+                                </div>
+                            </div>
+                        `
+                    });
+                    
+                    // スライド2: AIの現在地
+                    currentSlides.push({
+                        title: 'AIの現在地',
+                        content: `
+                            <div style="padding: 20px;">
+                                <div style="border-left: 5px solid #4285F4; padding-left: 20px; margin-bottom: 30px;">
+                                    <h1 style="font-size: 64px; font-weight: bold; color: #0D47A1; margin-bottom: 10px;">AIの現在地</h1>
+                                    <h2 style="font-size: 28px; color: #37474F;">生成AIがもたらした革命</h2>
+                                </div>
+                                <div style="background: #E3F2FD; border-radius: 10px; padding: 30px; margin-top: 30px; text-align: center;">
+                                    <div style="font-size: 80px; margin-bottom: 20px;">🧠</div>
+                                    <p style="font-size: 18px; color: #1565C0;">抽象的な人工知能ニューラルネットワークのイメージ</p>
+                                </div>
+                            </div>
+                        `
+                    });
+                    
+                    // スライド3: 社会実装の最前線
+                    currentSlides.push({
+                        title: '社会実装の最前線',
+                        content: `
+                            <div style="padding: 20px;">
+                                <h1 style="font-size: 36px; font-weight: bold; color: #1F2937; text-align: center; margin-bottom: 30px;">社会実装の最前線：AIはどこで活躍しているか？</h1>
+                                <div style="display: flex; justify-content: space-around; margin-top: 40px;">
+                                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 30%;">
+                                        <div style="font-size: 48px; margin-bottom: 15px;">🏥</div>
+                                        <h3 style="font-size: 18px; font-weight: bold; color: #374151; margin-bottom: 10px;">医療分野</h3>
+                                        <p style="font-size: 14px; color: #4B5563;">画像診断支援や創薬プロセスの高速化に貢献します。</p>
+                                    </div>
+                                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 30%;">
+                                        <div style="font-size: 48px; margin-bottom: 15px;">🚗</div>
+                                        <h3 style="font-size: 18px; font-weight: bold; color: #374151; margin-bottom: 10px;">自動運転</h3>
+                                        <p style="font-size: 14px; color: #4B5563;">周囲の環境をリアルタイムで認識し、安全な走行を実現します。</p>
+                                    </div>
+                                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 30%;">
+                                        <div style="font-size: 48px; margin-bottom: 15px;">💰</div>
+                                        <h3 style="font-size: 18px; font-weight: bold; color: #374151; margin-bottom: 10px;">金融・経済</h3>
+                                        <p style="font-size: 14px; color: #4B5563;">市場予測や不正検知、パーソナライズされたアドバイスを提供します。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    });
+                    
+                    // スライド4: 2030年のAI
+                    currentSlides.push({
+                        title: '2030年のAI：未来予測と倫理的課題',
+                        content: `
+                            <div style="padding: 20px; text-align: center;">
+                                <h1 style="font-size: 48px; font-weight: bold; color: #1C3A5E; margin-bottom: 20px;">2030年のAI：未来予測と倫理的課題</h1>
+                                <div style="width: 150px; height: 3px; background: #4A90E2; margin: 0 auto 40px;"></div>
+                                <div style="background: #F0F4F8; border-radius: 15px; padding: 40px; margin: 20px 0;">
+                                    <div style="font-size: 120px; margin-bottom: 20px;">🔮</div>
+                                    <p style="font-size: 18px; color: #1565C0;">未来のテクノロジーと人工知能の抽象的な表現</p>
+                                </div>
+                            </div>
+                        `
+                    });
+                    
+                    // スライド5: まとめ
+                    currentSlides.push({
+                        title: 'まとめ：AIと共存する未来をどう創るか',
+                        content: `
+                            <div style="padding: 20px;">
+                                <h1 style="font-size: 36px; font-weight: bold; color: #0F172A; margin-bottom: 30px;">まとめ：AIと共存する未来をどう創るか</h1>
+                                <div style="width: 320px; height: 2px; background: #3B82F6; margin-bottom: 30px;"></div>
+                                <div style="display: flex; align-items: center; gap: 40px;">
+                                    <div style="flex: 1;">
+                                        <ul style="font-size: 22px; color: #334155; line-height: 2;">
+                                            <li>継続的な学習と適応</li>
+                                            <li>倫理的指針の確立と実践</li>
+                                            <li>人間とAIの協働による価値創造</li>
+                                        </ul>
+                                    </div>
+                                    <div style="flex: 1; text-align: center;">
+                                        <div style="font-size: 150px;">🤝</div>
+                                        <p style="font-size: 16px; color: #6B7280; margin-top: 20px;">人工知能と人間の協力を象徴するイメージ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+// プレゼンテーション設定
+pptx.layout = 'LAYOUT_WIDE';
+pptx.title = 'AIが拓く未来：私たちの生活と社会はどう変わるか？';
+pptx.author = 'AI Slide Generator';
+pptx.company = 'AI-Powered Presentation System';
+
+// スライド1: タイトル
+let slide1 = pptx.addSlide();
+slide1.background = { path: 'https://images.unsplash.com/photo-1646153389640-958d7ba1a864' };
+slide1.addShape('rect', { x: 0, y: 0, w: '100%', h: '100%', fill: { color: '000000', transparency: 60 } });
+slide1.addText('AIが拓く未来へようこそ', { x: '5%', y: '35%', w: '90%', h: '15%', fontSize: 48, bold: true, color: 'FFFFFF', align: 'center' });
+slide1.addText('テクノロジーがもたらす変革と可能性', { x: '5%', y: '52%', w: '90%', h: '10%', fontSize: 24, color: 'E0E0E0', align: 'center' });
+
+// スライド2-5: 詳細内容...
+pptx.writeFile({ fileName: 'AI-Future-Presentation.pptx' });`);
+                    break;
+                    
+                case 'innovation':
+                    // 技術革新版のスライド（同様の構造で異なるコンテンツ）
+                    currentSlides.push({
+                        title: '技術革新と社会変革',
+                        content: `
+                            <div style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); height: 100%; position: relative; display: flex; align-items: center; justify-content: center;">
+                                <div style="color: white; text-align: center;">
+                                    <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">技術革新と社会変革</h1>
+                                    <p style="font-size: 24px;">AIが切り拓く新たな可能性</p>
+                                </div>
+                            </div>
+                        `
+                    });
+                    
+                    showCode(`let pptx = new PptxGenJS();
+pptx.layout = 'LAYOUT_WIDE';
+pptx.title = '技術革新と社会変革';
+pptx.author = 'AI Innovation Team';
+
+// 技術革新をテーマにしたプレゼンテーション
+let slide1 = pptx.addSlide();
+slide1.background = { fill: { type: 'gradient', colors: ['11998e', '38ef7d'], angle: 135 } };
+slide1.addText('技術革新と社会変革', { x: '5%', y: '35%', w: '90%', h: '15%', fontSize: 48, bold: true, color: 'FFFFFF', align: 'center' });
+
+pptx.writeFile({ fileName: 'AI-Innovation-Presentation.pptx' });`);
+                    break;
+            }
+            
+            currentSlideIndex = 0;
+            updateSlide();
+            showPreviewModal(`AIプレゼンテーション - ${type}`);
+        }
+        
+        // スライドの更新
+        function updateSlide() {
+            if (currentSlides.length === 0) return;
+            
+            const slide = currentSlides[currentSlideIndex];
+            document.getElementById('slideContent').innerHTML = slide.content;
+            document.getElementById('slideIndicator').textContent = `${currentSlideIndex + 1} / ${currentSlides.length}`;
+            
+            // 前後ボタンの有効/無効化
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === currentSlides.length - 1;
+            
+            // スライド固有の初期化処理があれば実行
+            if (slide.init) {
+                setTimeout(slide.init, 100);
+            }
+        }
+        
+        // 前のスライド
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlide();
+            }
+        }
+        
+        // 次のスライド
+        function nextSlide() {
+            if (currentSlideIndex < currentSlides.length - 1) {
+                currentSlideIndex++;
+                updateSlide();
+            }
+        }
+        
+        // ダウンロードボタンのイベントハンドラ
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            switch(currentType) {
+                case 'chart':
+                    generateChart(currentSubType);
+                    break;
+                case 'table':
+                    generateTable(currentSubType);
+                    break;
+                case 'shape':
+                    generateShape(currentSubType);
+                    break;
+                case 'text':
+                    generateText(currentSubType);
+                    break;
+                case 'ai':
+                    generateAI(currentSubType);
+                    break;
+            }
+            bootstrap.Modal.getInstance(document.getElementById('previewModal')).hide();
+        });
+        
+        // 以下、元のgenerate関数をそのまま使用
+        
+        // チャート生成関数
+        function generateChart(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'bar':
+                    slide.addChart(pptx.ChartType.bar, [
+                        {
+                            name: '売上データ',
+                            labels: ['1月', '2月', '3月', '4月'],
+                            values: [1500, 2500, 2000, 3000]
+                        }
+                    ], {
+                        x: 1, y: 1, w: 8, h: 4,
+                        title: '月別売上グラフ'
+                    });
+                    break;
+                    
+                case 'line':
+                    slide.addChart(pptx.ChartType.line, [
+                        {
+                            name: 'トレンド',
+                            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                            values: [100, 150, 130, 180]
+                        }
+                    ], {
+                        x: 1, y: 1, w: 8, h: 4,
+                        title: '四半期トレンド'
+                    });
+                    break;
+                    
+                case 'pie':
+                    slide.addChart(pptx.ChartType.pie, [
+                        {
+                            name: '市場シェア',
+                            labels: ['製品A', '製品B', '製品C', 'その他'],
+                            values: [35, 25, 20, 20]
+                        }
+                    ], {
+                        x: 1, y: 1, w: 6, h: 4,
+                        title: '市場シェア分析'
+                    });
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-chart-demo.pptx` });
+        }
+        
+        // テーブル生成関数
+        function generateTable(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'basic':
+                    slide.addTable([
+                        ['項目', '数値', '状態'],
+                        ['売上', '¥1,000,000', '達成'],
+                        ['コスト', '¥500,000', '予算内'],
+                        ['利益', '¥500,000', '良好']
+                    ], {
+                        x: 1, y: 1, w: 8, h: 3
+                    });
+                    break;
+                    
+                case 'styled':
+                    slide.addTable([
+                        [{ text: 'ヘッダー1', options: { fill: '363636', color: 'FFFFFF', bold: true } },
+                         { text: 'ヘッダー2', options: { fill: '363636', color: 'FFFFFF', bold: true } }],
+                        ['データ1', 'データ2'],
+                        ['データ3', 'データ4']
+                    ], {
+                        x: 1, y: 1, w: 8, h: 3,
+                        border: { pt: 1, color: 'CCCCCC' }
+                    });
+                    break;
+                    
+                case 'data':
+                    let rows = [['ID', '名前', '部門', '売上']];
+                    for(let i = 1; i <= 10; i++) {
+                        rows.push([`00${i}`, `社員${i}`, `部門${i % 3 + 1}`, `¥${i * 100000}`]);
+                    }
+                    slide.addTable(rows, {
+                        x: 0.5, y: 0.5, w: 9, h: 5,
+                        fontSize: 10
+                    });
+                    break;
+                case 'evaluation':
+                    {
+                        slide.addText("4-1. 定性評価", { x: 0.5, y: 0.25, w: "90%", h: 0.5, fontSize: 32, bold: true });
+                        slide.addText("実施事項に対する評価と課題", { x: 0.5, y: 0.75, w: "90%", h: 0.5, fontSize: 24, bold: true });
+                        slide.addText(
+                            "各項目について一定の成果は得られたものの、サービス利用の拡大とデータ収集、利活用の促進に向け、抽出された課題への対応を検討し、今後実施していく方針です。", { x: 0.5, y: 1.5, w: "90%", h: 0.6, fontSize: 14 }
+                        );
+
+                        const commonCellOpts = {
+                            border: { type: 'solid', pt: 1, color: 'CCCCCC' },
+                            valign: 'middle',
+                            fontSize: 12,
+                        };
+
+                        const headerOpts = {
+                            ...commonCellOpts,
+                            fill: { color: '92D050' },
+                            color: '333333',
+                            bold: true,
+                            align: 'center',
+                            fontSize: 14,
+                        };
+
+                        const itemCellOpts = {
+                            ...commonCellOpts,
+                            fill: { color: 'E2EFDA' },
+                            align: 'center',
+                        };
+
+                        const evalCellOpts = {
+                            ...commonCellOpts,
+                            fill: { color: 'E2EFDA' },
+                        };
+
+                        const tableData = [
+                            [{ text: "項目", options: headerOpts }, { text: "評価", options: headerOpts }, { text: "課題", options: headerOpts }],
+                            [
+                                { text: "匿名加工情報\nの収集", options: { ...itemCellOpts, rowspan: 2 } },
+                                { text: "匿名加工情報による収集追加により、データ数は増加", options: { ...evalCellOpts, rowspan: 2 } },
+                                { text: [{ text: '匿名加工方法の見直し・更新', options: { bold: true, color: '333333' } }, { text: '\n・有識者の助言のもと適法に定義済み', options: { breakLine: true } }, { text: '\n・ただし今後、データ利活用時に組み合わせる情報により個人が特定される恐れもあり都度データ粒度の精査、検討等が必要', options: { breakLine: true } }], options: commonCellOpts },
+                            ],
+                            [{
+                                text: [{ text: '加工事業者の分離', options: { bold: true, color: '333333' } }, { text: '\n・匿名加工処理者とデータ利用者が同一事業者となる点は、業務環境を完全に分離し、それぞれ専任の担当者を配置する等の運用対応により問題なしとしたものの、運用体制の変更等の際には都度チェックが必要', options: { breakLine: true } }],
+                                options: commonCellOpts
+                            }, ],
+                            [
+                                { text: "分析機能\nの提供", options: { ...itemCellOpts, rowspan: 2 } },
+                                { text: "概況を端的に把握可能なダッシュボードでのレポーティングを実施", options: { ...evalCellOpts, rowspan: 2 } },
+                                { text: [{ text: '利用増の対策検討', options: { bold: true, color: '333333' } }, { text: '\n・利用件数を増加させる施策の検討が必要(レポートの改善、簡易な集計画面の提供等)検討が必要', options: { breakLine: true } }], options: commonCellOpts },
+                            ],
+                            [{
+                                text: [{ text: 'データ利活用の高度化検討', options: { bold: true, color: '333333' } }, { text: '\n・テキストデータの分析、AIの利用等、高度な分析実施に向けたデータ整備と実施方法の検討が必要', options: { breakLine: true } }],
+                                options: commonCellOpts
+                            }, ],
+                            [
+                                { text: "決済機能\nの提供", options: { ...itemCellOpts, rowspan: 2 } },
+                                { text: "2地域でそれぞれ決済サービスの提供体制、運用スキームを構築、実証し、示唆を収集", options: { ...evalCellOpts, rowspan: 2 } },
+                                { text: [{ text: '導入店舗数の拡大', options: { bold: true, color: '333333' } }, { text: '\n・店舗数の拡大に向け、導入の抵抗となる店舗端末の用意、決済手数料、運用費に対し、導入メリットの提示等、対応策の検討が必要', options: { breakLine: true } }], options: commonCellOpts },
+                            ],
+                            [{
+                                text: [{ text: 'ユーザ利用の拡大', options: { bold: true, color: '333333' } }, { text: '\n・ユーザへのプロモーション、利用メリット、インセンティブの提示等、認知度の向上と利用促進策の検討、実施が必要', options: { breakLine: true } }],
+                                options: commonCellOpts
+                            }, ],
+                            [
+                                { text: "海外法令の\n調査と対応", options: { ...itemCellOpts, rowspan: 2 } },
+                                { text: "最新動向を把握し、有識者のアドバイスのもと対応を実施", options: { ...evalCellOpts, rowspan: 2 } },
+                                { text: [{ text: 'EEA国籍ユーザデータの扱い', options: { bold: true, color: '333333' } }, { text: '\n・現状、一律破棄としているEEA国籍ユーザのデータについて、サービス利用位置やデータ連携時の位置情報をもとに破棄の判断を実施する仕組みの検討、構築', options: { breakLine: true } }], options: commonCellOpts },
+                            ],
+                            [{
+                                text: [{ text: 'ePrivacy規則への対応', options: { bold: true, color: '333333' } }, { text: '\n・協議検討中のePrivacy規則について、施行され次第早急に対応が可能なよう、今後の動向注視を継続し、対応を整理', options: { breakLine: true } }],
+                                options: commonCellOpts
+                            }, ],
+                        ];
+
+                        slide.addTable(tableData, {
+                            x: 0.5,
+                            y: 2.3,
+                            w: 9.0,
+                            colW: [1.5, 2.5, 5.0],
+                        });
+
+                        slide.addText('33', { x: 9.2, y: 7.1, w: 0.5, h: 0.3, align: 'right', fontSize: 10 });
+                    }
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-table-demo.pptx` });
+        }
+        
+        // シェイプ生成関数
+        function generateShape(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'basic':
+                    slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1, w: 2, h: 2, fill: 'FF0000' });
+                    slide.addShape(pptx.ShapeType.ellipse, { x: 4, y: 1, w: 2, h: 2, fill: '00FF00' });
+                    slide.addShape(pptx.ShapeType.triangle, { x: 7, y: 1, w: 2, h: 2, fill: '0000FF' });
+                    break;
+                    
+                case 'flowchart':
+                    // プロセス
+                    slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1, w: 2, h: 1, fill: '4472C4' });
+                    slide.addText('開始', { x: 1, y: 1, w: 2, h: 1, align: 'center', valign: 'middle', color: 'FFFFFF' });
+                    
+                    // 矢印
+                    slide.addShape(pptx.ShapeType.line, { x: 3, y: 1.5, w: 1, h: 0, line: { color: '000000', width: 2 } });
+                    
+                    // 判断
+                    slide.addShape(pptx.ShapeType.diamond, { x: 4, y: 0.5, w: 2, h: 2, fill: 'FFC000' });
+                    slide.addText('条件', { x: 4, y: 0.5, w: 2, h: 2, align: 'center', valign: 'middle' });
+                    break;
+                    
+                case 'custom':
+                    // カスタム図形の組み合わせ
+                    slide.addShape(pptx.ShapeType.roundRect, { x: 2, y: 1, w: 6, h: 3, fill: 'E7E6E6', rectRadius: 0.2 });
+                    slide.addShape(pptx.ShapeType.star5, { x: 0.5, y: 0.5, w: 1, h: 1, fill: 'FFD700' });
+                    slide.addText('カスタムデザイン', { x: 2, y: 2, w: 6, h: 1, fontSize: 24, bold: true, align: 'center' });
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-shape-demo.pptx` });
+        }
+        
+        // テキスト生成関数
+        function generateText(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'title':
+                    slide.addText('インパクトのあるタイトル', {
+                        x: 0.5, y: 1.5, w: 9, h: 2,
+                        fontSize: 48, bold: true,
+                        align: 'center',
+                        color: '363636'
+                    });
+                    slide.addText('サブタイトルやキャッチコピー', {
+                        x: 0.5, y: 3.5, w: 9, h: 1,
+                        fontSize: 24,
+                        align: 'center',
+                        color: '666666'
+                    });
+                    break;
+                    
+                case 'bullets':
+                    slide.addText('重要なポイント', { x: 0.5, y: 0.5, fontSize: 24, bold: true });
+                    slide.addText([
+                        { text: '• 最初のポイント', options: { bullet: true, indentLevel: 0 } },
+                        { text: '• 次のポイント', options: { bullet: true, indentLevel: 0 } },
+                        { text: '  ◦ サブポイント1', options: { bullet: true, indentLevel: 1 } },
+                        { text: '  ◦ サブポイント2', options: { bullet: true, indentLevel: 1 } },
+                        { text: '• 最後のポイント', options: { bullet: true, indentLevel: 0 } }
+                    ], {
+                        x: 0.5, y: 1.5, w: 9, h: 4,
+                        fontSize: 18,
+                        lineSpacing: 24
+                    });
+                    break;
+                    
+                case 'quote':
+                    slide.addShape(pptx.ShapeType.rect, {
+                        x: 1, y: 1.5, w: 8, h: 3,
+                        fill: 'F5F5F5',
+                        line: { color: '4472C4', width: 3 }
+                    });
+                    slide.addText('"成功とは、失敗から失敗へと情熱を失わずに進む能力である"', {
+                        x: 1.5, y: 2, w: 7, h: 1.5,
+                        fontSize: 20,
+                        italic: true,
+                        align: 'center',
+                        valign: 'middle'
+                    });
+                    slide.addText('- ウィンストン・チャーチル', {
+                        x: 1.5, y: 3.5, w: 7, h: 0.5,
+                        fontSize: 16,
+                        align: 'right'
+                    });
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `${type}-text-demo.pptx` });
+        }
+        
+        // AIプレゼンテーション生成関数
+        function generateAI(type) {
+            let pptx = new PptxGenJS();
+            
+            // プレゼンテーション設定
+            pptx.layout = 'LAYOUT_WIDE';
+            pptx.title = 'AIが拓く未来：私たちの生活と社会はどう変わるか？';
+            pptx.author = 'AI Slide Generator';
+            pptx.company = 'AI-Powered Presentation System';
+            
+            switch(type) {
+                case 'future':
+                    // スライド1: タイトルスライド
+                    let slide1 = pptx.addSlide();
+                    slide1.background = { color: 'F5F7FA' };
+                    
+                    // 背景画像の代替として背景色付きの図形を追加
+                    slide1.addShape(pptx.ShapeType.rect, {
+                        x: 0, y: 0, w: '100%', h: '100%',
+                        fill: { 
+                            type: 'gradient',
+                            colors: [
+                                { position: 0, color: '667eea' },
+                                { position: 100, color: '764ba2' }
+                            ],
+                            angle: 135
+                        }
+                    });
+                    
+                    // 半透明オーバーレイ
+                    slide1.addShape(pptx.ShapeType.rect, {
+                        x: 0, y: 0, w: '100%', h: '100%',
+                        fill: { color: '000000', transparency: 60 }
+                    });
+                    
+                    // タイトルテキスト
+                    slide1.addText('AIが拓く未来へようこそ', {
+                        x: '5%', y: '35%', w: '90%', h: '15%',
+                        fontSize: 48, bold: true, color: 'FFFFFF',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    // サブタイトル
+                    slide1.addText('テクノロジーがもたらす変革と可能性', {
+                        x: '5%', y: '52%', w: '90%', h: '10%',
+                        fontSize: 24, color: 'E0E0E0',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    // スライド2: AIの現在地
+                    let slide2 = pptx.addSlide();
+                    slide2.background = { color: 'F8F9FA' };
+                    
+                    // 左の装飾線
+                    slide2.addShape(pptx.ShapeType.rect, {
+                        x: 0, y: 0, w: '3%', h: '100%',
+                        fill: { color: '4285F4' }
+                    });
+                    
+                    // タイトル
+                    slide2.addText('AIの現在地', {
+                        x: '8%', y: '15%', w: '84%', h: '18%',
+                        fontSize: 64, bold: true, color: '0D47A1',
+                        align: 'left', valign: 'middle'
+                    });
+                    
+                    // サブタイトル
+                    slide2.addText('生成AIがもたらした革命', {
+                        x: '8%', y: '34%', w: '84%', h: '10%',
+                        fontSize: 28, color: '37474F',
+                        align: 'left', valign: 'middle'
+                    });
+                    
+                    // 画像エリアの代替として背景付きテキストボックス
+                    slide2.addShape(pptx.ShapeType.rect, {
+                        x: '8%', y: '52%', w: '84%', h: '40%',
+                        fill: { color: 'E3F2FD' }
+                    });
+                    
+                    slide2.addText('🧠', {
+                        x: '8%', y: '60%', w: '84%', h: '15%',
+                        fontSize: 80, align: 'center', valign: 'middle'
+                    });
+                    
+                    slide2.addText('抽象的な人工知能ニューラルネットワークのイメージ', {
+                        x: '8%', y: '78%', w: '84%', h: '8%',
+                        fontSize: 18, color: '1565C0', align: 'center', valign: 'middle'
+                    });
+                    
+                    // スライド3: 社会実装の最前線
+                    let slide3 = pptx.addSlide();
+                    slide3.background = { color: 'F5F7FA' };
+                    
+                    // タイトル
+                    slide3.addText('社会実装の最前線：AIはどこで活躍しているか？', {
+                        x: '5%', y: '5%', w: '90%', h: '15%',
+                        fontSize: 36, bold: true, color: '1F2937',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    // 医療分野カード
+                    slide3.addShape(pptx.ShapeType.roundRect, {
+                        x: '5%', y: '25%', w: '28%', h: '65%',
+                        fill: { color: 'FFFFFF' },
+                        line: { color: 'E5E7EB', width: 1 },
+                        rectRadius: 0.2
+                    });
+                    
+                    slide3.addText('🏥', {
+                        x: '5%', y: '30%', w: '28%', h: '20%',
+                        fontSize: 48, align: 'center', valign: 'middle'
+                    });
+                    
+                    slide3.addText('医療分野', {
+                        x: '5%', y: '53%', w: '28%', h: '10%',
+                        fontSize: 18, bold: true, color: '374151',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    slide3.addText('画像診断支援や創薬プロセスの高速化に貢献します。', {
+                        x: '7%', y: '65%', w: '24%', h: '20%',
+                        fontSize: 14, color: '4B5563',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    // 自動運転カード
+                    slide3.addShape(pptx.ShapeType.roundRect, {
+                        x: '36%', y: '25%', w: '28%', h: '65%',
+                        fill: { color: 'FFFFFF' },
+                        line: { color: 'E5E7EB', width: 1 },
+                        rectRadius: 0.2
+                    });
+                    
+                    slide3.addText('🚗', {
+                        x: '36%', y: '30%', w: '28%', h: '20%',
+                        fontSize: 48, align: 'center', valign: 'middle'
+                    });
+                    
+                    slide3.addText('自動運転', {
+                        x: '36%', y: '53%', w: '28%', h: '10%',
+                        fontSize: 18, bold: true, color: '374151',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    slide3.addText('周囲の環境をリアルタイムで認識し、安全な走行を実現します。', {
+                        x: '38%', y: '65%', w: '24%', h: '20%',
+                        fontSize: 14, color: '4B5563',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    // 金融・経済カード
+                    slide3.addShape(pptx.ShapeType.roundRect, {
+                        x: '67%', y: '25%', w: '28%', h: '65%',
+                        fill: { color: 'FFFFFF' },
+                        line: { color: 'E5E7EB', width: 1 },
+                        rectRadius: 0.2
+                    });
+                    
+                    slide3.addText('💰', {
+                        x: '67%', y: '30%', w: '28%', h: '20%',
+                        fontSize: 48, align: 'center', valign: 'middle'
+                    });
+                    
+                    slide3.addText('金融・経済', {
+                        x: '67%', y: '53%', w: '28%', h: '10%',
+                        fontSize: 18, bold: true, color: '374151',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    slide3.addText('市場予測や不正検知、パーソナライズされたアドバイスを提供します。', {
+                        x: '69%', y: '65%', w: '24%', h: '20%',
+                        fontSize: 14, color: '4B5563',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    // スライド4: 2030年のAI
+                    let slide4 = pptx.addSlide();
+                    slide4.background = { color: 'F5F7FA' };
+                    
+                    // タイトル
+                    slide4.addText('2030年のAI：未来予測と倫理的課題', {
+                        x: '5%', y: '25%', w: '90%', h: '18%',
+                        fontSize: 48, bold: true, color: '1C3A5E',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    // 装飾線
+                    slide4.addShape(pptx.ShapeType.rect, {
+                        x: '42.5%', y: '46%', w: '15%', h: '0.3%',
+                        fill: { color: '4A90E2' }
+                    });
+                    
+                    // 画像エリアの代替
+                    slide4.addShape(pptx.ShapeType.rect, {
+                        x: '22.5%', y: '55%', w: '55%', h: '35%',
+                        fill: { color: 'F0F4F8' }
+                    });
+                    
+                    slide4.addText('🔮', {
+                        x: '22.5%', y: '60%', w: '55%', h: '20%',
+                        fontSize: 120, align: 'center', valign: 'middle'
+                    });
+                    
+                    slide4.addText('未来のテクノロジーと人工知能の抽象的な表現', {
+                        x: '22.5%', y: '82%', w: '55%', h: '8%',
+                        fontSize: 18, color: '1565C0',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    // スライド5: まとめ
+                    let slide5 = pptx.addSlide();
+                    slide5.background = { color: 'F8FAFC' };
+                    
+                    // タイトル
+                    slide5.addText('まとめ：AIと共存する未来をどう創るか', {
+                        x: '7%', y: '10%', w: '86%', h: '12%',
+                        fontSize: 36, bold: true, color: '0F172A',
+                        align: 'left', valign: 'middle'
+                    });
+                    
+                    // 装飾線
+                    slide5.addShape(pptx.ShapeType.rect, {
+                        x: '7%', y: '24%', w: '40%', h: '0.5%',
+                        fill: { color: '3B82F6' }
+                    });
+                    
+                    // 箇条書き
+                    slide5.addText([
+                        { text: '継続的な学習と適応', options: { bullet: true } },
+                        { text: '倫理的指針の確立と実践', options: { bullet: true } },
+                        { text: '人間とAIの協働による価値創造', options: { bullet: true } }
+                    ], {
+                        x: '7%', y: '32%', w: '45%', h: '50%',
+                        fontSize: 22, color: '334155',
+                        lineSpacing: 36
+                    });
+                    
+                    // 右側の画像エリア
+                    slide5.addText('🤝', {
+                        x: '58%', y: '40%', w: '35%', h: '30%',
+                        fontSize: 150, align: 'center', valign: 'middle'
+                    });
+                    
+                    slide5.addText('人工知能と人間の協力を象徴するイメージ', {
+                        x: '58%', y: '75%', w: '35%', h: '8%',
+                        fontSize: 16, color: '6B7280',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    break;
+                    
+                case 'innovation':
+                    // 技術革新版 - より簡素化
+                    let innSlide1 = pptx.addSlide();
+                    innSlide1.addShape(pptx.ShapeType.rect, {
+                        x: 0, y: 0, w: '100%', h: '100%',
+                        fill: { 
+                            type: 'gradient',
+                            colors: [
+                                { position: 0, color: '11998e' },
+                                { position: 100, color: '38ef7d' }
+                            ],
+                            angle: 135
+                        }
+                    });
+                    
+                    innSlide1.addText('技術革新と社会変革', {
+                        x: '5%', y: '35%', w: '90%', h: '15%',
+                        fontSize: 48, bold: true, color: 'FFFFFF',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    innSlide1.addText('AIが切り拓く新たな可能性', {
+                        x: '5%', y: '52%', w: '90%', h: '10%',
+                        fontSize: 24, color: 'FFFFFF',
+                        align: 'center', valign: 'middle'
+                    });
+                    
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `AI-${type}-presentation.pptx` });
+        }
+        
+        // コード表示関数
+        function showCode(code) {
+            document.getElementById('codePreview').innerHTML = `<pre>${code}</pre>`;
+        }
+    </script>
+</body>
+</html>
