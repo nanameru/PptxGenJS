@@ -407,6 +407,228 @@
             </div>
         </div>
 
+        <!-- JSONベースPPTX生成テンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">📄 JSONベースPPTX生成</h2>
+            <div class="row g-4">
+                <div class="col-md-12">
+                    <div class="card template-card">
+                        <div class="card-body">
+                            <h5 class="card-title">JSONからPPTX生成</h5>
+                            <p class="card-text">構造化されたJSONデータから高機能なPPTXファイルを生成します</p>
+                            
+                            <!-- JSON入力エリア -->
+                            <div class="mb-3">
+                                <label for="jsonInput" class="form-label">JSONデータ入力:</label>
+                                <textarea class="form-control" id="jsonInput" rows="15" placeholder="JSONデータをここに貼り付けてください...">
+{
+  "title": "AI技術の最新動向",
+  "author": "AI Research Team",
+  "company": "Tech Innovation Lab",
+  "layout": "LAYOUT_16x9",
+  "slides": [
+    {
+      "slideIndex": 0,
+      "topic": "AI技術の革命",
+      "background": {
+        "type": "gradient",
+        "colors": ["667eea", "764ba2"],
+        "angle": 135
+      },
+      "elements": [
+        {
+          "type": "text",
+          "textType": "title",
+          "content": "AI技術の革命",
+          "options": {
+            "x": 5,
+            "y": 35,
+            "w": 90,
+            "h": 15
+          },
+          "style": {
+            "fontSize": 48,
+            "bold": true,
+            "color": "FFFFFF",
+            "align": "center"
+          }
+        },
+        {
+          "type": "text",
+          "textType": "subtitle", 
+          "content": "次世代テクノロジーの可能性",
+          "options": {
+            "x": 5,
+            "y": 52,
+            "w": 90,
+            "h": 10
+          },
+          "style": {
+            "fontSize": 24,
+            "color": "E0E0E0",
+            "align": "center"
+          }
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "topic": "AI活用事例",
+      "background": "#F8F9FA",
+      "elements": [
+        {
+          "type": "text",
+          "textType": "title",
+          "content": "AI活用事例",
+          "options": {
+            "x": 8,
+            "y": 15,
+            "w": 84,
+            "h": 18
+          },
+          "style": {
+            "fontSize": 48,
+            "bold": true,
+            "color": "0D47A1"
+          }
+        },
+        {
+          "type": "chart",
+          "chartType": "bar",
+          "data": [
+            {
+              "name": "効果測定",
+              "labels": ["医療", "金融", "製造", "小売"],
+              "values": [85, 72, 68, 58]
+            }
+          ],
+          "options": {
+            "x": 10,
+            "y": 40,
+            "w": 80,
+            "h": 50
+          },
+          "chartOptions": {
+            "title": "業界別AI導入効果（%）",
+            "showValue": true,
+            "chartColors": ["4285F4", "34A853", "FBBC04", "EA4335"]
+          }
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "topic": "技術比較表",
+      "background": "#FFFFFF",
+      "elements": [
+        {
+          "type": "text",
+          "textType": "title",
+          "content": "AI技術比較",
+          "options": {
+            "x": 5,
+            "y": 10,
+            "w": 90,
+            "h": 15
+          },
+          "style": {
+            "fontSize": 36,
+            "bold": true,
+            "color": "1F2937",
+            "align": "center"
+          }
+        },
+        {
+          "type": "table",
+          "data": [
+            [
+              {"text": "技術", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}},
+              {"text": "精度", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}},
+              {"text": "処理速度", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}},
+              {"text": "コスト", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}}
+            ],
+            ["機械学習", "85%", "高速", "中"],
+            ["深層学習", "92%", "中速", "高"],
+            ["強化学習", "88%", "低速", "高"]
+          ],
+          "options": {
+            "x": 10,
+            "y": 30,
+            "w": 80,
+            "h": 60
+          },
+          "tableOptions": {
+            "border": {"type": "solid", "pt": 1, "color": "CCCCCC"},
+            "fontSize": 16,
+            "align": "center"
+          }
+        }
+      ]
+    }
+  ]
+}</textarea>
+                            </div>
+                            
+                            <div class="d-flex gap-2 mb-3">
+                                <button class="btn btn-preview" onclick="previewFromJSON()">プレビュー</button>
+                                <button class="btn btn-demo" onclick="generateFromJSON()">ダウンロード</button>
+                                <button class="btn btn-secondary" onclick="loadSampleJSON()">サンプル読み込み</button>
+                                <button class="btn btn-warning" onclick="validateJSON()">JSON検証</button>
+                            </div>
+                            
+                            <div id="jsonValidationResult" class="alert" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 高度な機能テンプレート -->
+        <div class="template-category">
+            <h2 class="category-title">⚡ 高度な機能</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🎨
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">高度な図形機能</h5>
+                            <p class="card-text">カスタムジオメトリ、影効果、グラデーション、回転を含む図形</p>
+                            <button class="btn btn-preview" onclick="previewAdvanced('shapes')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateAdvanced('shapes')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            🖼️
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">画像処理機能</h5>
+                            <p class="card-text">リサイズ、クロッピング、透明度、回転、SVGサポート</p>
+                            <button class="btn btn-preview" onclick="previewAdvanced('images')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateAdvanced('images')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📊
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">高度なチャート</h5>
+                            <p class="card-text">3Dチャート、マルチシリーズ、カスタムスタイリング</p>
+                            <button class="btn btn-preview" onclick="previewAdvanced('charts')">プレビュー</button>
+                            <button class="btn btn-demo" onclick="generateAdvanced('charts')">ダウンロード</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- コード表示エリア -->
         <div class="template-category">
             <h2 class="category-title">💻 コードプレビュー</h2>
@@ -1806,6 +2028,916 @@ pptx.writeFile({ fileName: 'AI-Innovation-Presentation.pptx' });`);
         // コード表示関数
         function showCode(code) {
             document.getElementById('codePreview').innerHTML = `<pre>${code}</pre>`;
+        }
+
+        // =========================
+        // JSONベースPPTX生成機能
+        // =========================
+        
+        // JSON検証機能
+        function validateJSON() {
+            const jsonText = document.getElementById('jsonInput').value;
+            const resultDiv = document.getElementById('jsonValidationResult');
+            
+            try {
+                const data = JSON.parse(jsonText);
+                
+                // 基本構造の検証
+                const requiredFields = ['title', 'slides'];
+                const missingFields = requiredFields.filter(field => !data[field]);
+                
+                if (missingFields.length > 0) {
+                    showValidationResult('danger', `必須フィールドが不足しています: ${missingFields.join(', ')}`);
+                    return false;
+                }
+                
+                // スライド構造の検証
+                if (!Array.isArray(data.slides) || data.slides.length === 0) {
+                    showValidationResult('danger', 'slidesは空でない配列である必要があります');
+                    return false;
+                }
+                
+                // 各スライドの検証
+                for (let i = 0; i < data.slides.length; i++) {
+                    const slide = data.slides[i];
+                    if (!slide.elements || !Array.isArray(slide.elements)) {
+                        showValidationResult('warning', `スライド${i + 1}: elementsが配列ではありません`);
+                    }
+                }
+                
+                showValidationResult('success', `✅ JSON構造は有効です (${data.slides.length}スライド)`);
+                return true;
+                
+            } catch (error) {
+                showValidationResult('danger', `❌ JSON構文エラー: ${error.message}`);
+                return false;
+            }
+        }
+        
+        // 検証結果の表示
+        function showValidationResult(type, message) {
+            const resultDiv = document.getElementById('jsonValidationResult');
+            resultDiv.className = `alert alert-${type}`;
+            resultDiv.textContent = message;
+            resultDiv.style.display = 'block';
+            
+            // 5秒後に非表示
+            setTimeout(() => {
+                resultDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        // サンプルJSON読み込み
+        function loadSampleJSON() {
+            const sampleJSON = {
+                "title": "AI・機械学習の最新動向",
+                "author": "Tech Innovation Team",
+                "company": "Future Tech Solutions",
+                "layout": "LAYOUT_16x9",
+                "slides": [
+                    {
+                        "slideIndex": 0,
+                        "topic": "AI革命の始まり",
+                        "background": {
+                            "type": "gradient",
+                            "colors": ["667eea", "764ba2"],
+                            "angle": 135
+                        },
+                        "elements": [
+                            {
+                                "type": "shape",
+                                "shapeType": "rect",
+                                "options": {"x": 0, "y": 0, "w": 100, "h": 100},
+                                "style": {
+                                    "fill": {"color": "000000", "transparency": 40}
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "textType": "title",
+                                "content": "AI革命の始まり",
+                                "options": {"x": 5, "y": 35, "w": 90, "h": 15},
+                                "style": {
+                                    "fontSize": 48,
+                                    "bold": true,
+                                    "color": "FFFFFF",
+                                    "align": "center"
+                                }
+                            },
+                            {
+                                "type": "text", 
+                                "textType": "subtitle",
+                                "content": "機械学習・深層学習の最新技術動向",
+                                "options": {"x": 5, "y": 52, "w": 90, "h": 10},
+                                "style": {
+                                    "fontSize": 24,
+                                    "color": "E0E0E0",
+                                    "align": "center"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slideIndex": 1,
+                        "topic": "AI技術の現状分析",
+                        "background": "#F8F9FA",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "textType": "title", 
+                                "content": "AI技術の現状分析",
+                                "options": {"x": 5, "y": 8, "w": 90, "h": 12},
+                                "style": {
+                                    "fontSize": 42,
+                                    "bold": true,
+                                    "color": "1F2937",
+                                    "align": "center"
+                                }
+                            },
+                            {
+                                "type": "chart",
+                                "chartType": "bar",
+                                "data": [
+                                    {
+                                        "name": "AI導入率",
+                                        "labels": ["自然言語処理", "画像認識", "音声認識", "予測分析", "自動化"],
+                                        "values": [92, 87, 78, 85, 74]
+                                    }
+                                ],
+                                "options": {"x": 10, "y": 25, "w": 80, "h": 60},
+                                "chartOptions": {
+                                    "title": "AI技術領域別普及率（%）",
+                                    "showValue": true,
+                                    "showLegend": false,
+                                    "chartColors": ["4285F4", "34A853", "FBBC04", "EA4335", "9C27B0"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slideIndex": 2,
+                        "topic": "産業別AI導入効果",
+                        "background": "#FFFFFF",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "textType": "title",
+                                "content": "産業別AI導入効果の比較",
+                                "options": {"x": 5, "y": 5, "w": 90, "h": 15},
+                                "style": {
+                                    "fontSize": 36,
+                                    "bold": true,
+                                    "color": "1F2937",
+                                    "align": "center"
+                                }
+                            },
+                            {
+                                "type": "table",
+                                "data": [
+                                    [
+                                        {"text": "産業分野", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}},
+                                        {"text": "導入率", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}},
+                                        {"text": "効果実感", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}},
+                                        {"text": "ROI", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}},
+                                        {"text": "評価", "options": {"fill": "4285F4", "color": "FFFFFF", "bold": true}}
+                                    ],
+                                    ["金融・保険", "89%", "95%", "320%", "★★★★★"],
+                                    ["製造業", "76%", "88%", "280%", "★★★★☆"], 
+                                    ["ヘルスケア", "82%", "92%", "350%", "★★★★★"],
+                                    ["小売・EC", "71%", "84%", "240%", "★★★☆☆"],
+                                    ["物流・運輸", "68%", "81%", "220%", "★★★☆☆"],
+                                    ["エネルギー", "74%", "87%", "300%", "★★★★☆"]
+                                ],
+                                "options": {"x": 5, "y": 25, "w": 90, "h": 65},
+                                "tableOptions": {
+                                    "border": {"type": "solid", "pt": 1, "color": "CCCCCC"},
+                                    "fontSize": 14,
+                                    "align": "center"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slideIndex": 3,
+                        "topic": "高度な図形とビジュアル",
+                        "background": "#F5F7FA",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "textType": "title",
+                                "content": "AI技術のアーキテクチャ",
+                                "options": {"x": 5, "y": 5, "w": 90, "h": 12},
+                                "style": {
+                                    "fontSize": 36,
+                                    "bold": true,
+                                    "color": "1F2937",
+                                    "align": "center"
+                                }
+                            },
+                            {
+                                "type": "shape",
+                                "shapeType": "roundRect",
+                                "options": {"x": 10, "y": 25, "w": 25, "h": 15},
+                                "style": {
+                                    "fill": {"color": "4285F4"},
+                                    "line": {"color": "2563EB", "width": 2},
+                                    "rectRadius": 0.3
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "content": "データ収集",
+                                "options": {"x": 10, "y": 25, "w": 25, "h": 15},
+                                "style": {
+                                    "fontSize": 16,
+                                    "bold": true,
+                                    "color": "FFFFFF",
+                                    "align": "center",
+                                    "valign": "middle"
+                                }
+                            },
+                            {
+                                "type": "shape",
+                                "shapeType": "roundRect", 
+                                "options": {"x": 40, "y": 25, "w": 25, "h": 15},
+                                "style": {
+                                    "fill": {"color": "34A853"},
+                                    "line": {"color": "16A249", "width": 2},
+                                    "rectRadius": 0.3
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "content": "機械学習",
+                                "options": {"x": 40, "y": 25, "w": 25, "h": 15},
+                                "style": {
+                                    "fontSize": 16,
+                                    "bold": true,
+                                    "color": "FFFFFF",
+                                    "align": "center",
+                                    "valign": "middle"
+                                }
+                            },
+                            {
+                                "type": "shape",
+                                "shapeType": "roundRect",
+                                "options": {"x": 70, "y": 25, "w": 25, "h": 15},
+                                "style": {
+                                    "fill": {"color": "EA4335"},
+                                    "line": {"color": "DC2626", "width": 2},
+                                    "rectRadius": 0.3
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "content": "予測・判断",
+                                "options": {"x": 70, "y": 25, "w": 25, "h": 15},
+                                "style": {
+                                    "fontSize": 16,
+                                    "bold": true,
+                                    "color": "FFFFFF",
+                                    "align": "center",
+                                    "valign": "middle"
+                                }
+                            },
+                            {
+                                "type": "shape",
+                                "shapeType": "rightArrow",
+                                "options": {"x": 36, "y": 31, "w": 3, "h": 3},
+                                "style": {
+                                    "fill": {"color": "6B7280"}
+                                }
+                            },
+                            {
+                                "type": "shape",
+                                "shapeType": "rightArrow",
+                                "options": {"x": 66, "y": 31, "w": 3, "h": 3},
+                                "style": {
+                                    "fill": {"color": "6B7280"}
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slideIndex": 4,
+                        "topic": "今後の展望と課題",
+                        "background": "#F8FAFC",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "textType": "title",
+                                "content": "AI技術の今後の展望と課題",
+                                "options": {"x": 5, "y": 8, "w": 90, "h": 12},
+                                "style": {
+                                    "fontSize": 36,
+                                    "bold": true,
+                                    "color": "0F172A",
+                                    "align": "center"
+                                }
+                            },
+                            {
+                                "type": "shape",
+                                "shapeType": "rect",
+                                "options": {"x": 8, "y": 25, "w": 40, "h": 65},
+                                "style": {
+                                    "fill": {"color": "E0F2FE"},
+                                    "line": {"color": "0EA5E9", "width": 2}
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "textType": "subtitle",
+                                "content": "機会・展望",
+                                "options": {"x": 10, "y": 28, "w": 36, "h": 8},
+                                "style": {
+                                    "fontSize": 20,
+                                    "bold": true,
+                                    "color": "0C4A6E",
+                                    "align": "center"
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "content": "• AGI（汎用人工知能）の実現\n• 量子コンピューティング連携\n• 自律システムの高度化\n• 創薬・材料科学での革新\n• カーボンニュートラル支援",
+                                "options": {"x": 10, "y": 38, "w": 36, "h": 45},
+                                "style": {
+                                    "fontSize": 14,
+                                    "color": "1F2937",
+                                    "lineSpacing": 24
+                                }
+                            },
+                            {
+                                "type": "shape",
+                                "shapeType": "rect",
+                                "options": {"x": 52, "y": 25, "w": 40, "h": 65},
+                                "style": {
+                                    "fill": {"color": "FEF3C7"},
+                                    "line": {"color": "F59E0B", "width": 2}
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "textType": "subtitle",
+                                "content": "課題・リスク",
+                                "options": {"x": 54, "y": 28, "w": 36, "h": 8},
+                                "style": {
+                                    "fontSize": 20,
+                                    "bold": true,
+                                    "color": "92400E",
+                                    "align": "center"
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "content": "• プライバシー・セキュリティ\n• アルゴリズムバイアス\n• 雇用への影響\n• エネルギー消費問題\n• 規制・ガバナンス整備",
+                                "options": {"x": 54, "y": 38, "w": 36, "h": 45},
+                                "style": {
+                                    "fontSize": 14,
+                                    "color": "1F2937",
+                                    "lineSpacing": 24
+                                }
+                            }
+                        ]
+                    }
+                ]
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(sampleJSON, null, 2);
+            showValidationResult('info', '📄 サンプルJSONを読み込みました');
+        }
+        
+        // JSONからプレビュー生成
+        function previewFromJSON() {
+            if (!validateJSON()) return;
+            
+            try {
+                const jsonData = JSON.parse(document.getElementById('jsonInput').value);
+                currentType = 'json';
+                currentSubType = 'custom';
+                currentSlides = [];
+                
+                // 各スライドをプレビュー用に変換
+                jsonData.slides.forEach((slideData, index) => {
+                    let slideHTML = '';
+                    
+                    // 背景の適用
+                    let backgroundStyle = '';
+                    if (slideData.background) {
+                        if (typeof slideData.background === 'string') {
+                            backgroundStyle = `background-color: ${slideData.background};`;
+                        } else if (slideData.background.type === 'gradient') {
+                            const colors = slideData.background.colors.map(c => `#${c}`).join(', ');
+                            backgroundStyle = `background: linear-gradient(${slideData.background.angle || 135}deg, ${colors});`;
+                        }
+                    }
+                    
+                    slideHTML = `<div style="${backgroundStyle} width: 100%; height: 100%; position: relative; padding: 20px;">`;
+                    
+                    // 各要素を処理
+                    slideData.elements.forEach(element => {
+                        const opts = element.options || {};
+                        const style = element.style || {};
+                        
+                        switch (element.type) {
+                            case 'text':
+                                const fontSize = style.fontSize || 16;
+                                const color = style.color ? `#${style.color}` : '#000000';
+                                const fontWeight = style.bold ? 'bold' : 'normal';
+                                const textAlign = style.align || 'left';
+                                
+                                slideHTML += `
+                                    <div style="
+                                        position: absolute;
+                                        left: ${opts.x || 0}%;
+                                        top: ${opts.y || 0}%;
+                                        width: ${opts.w || 50}%;
+                                        height: ${opts.h || 10}%;
+                                        font-size: ${fontSize}px;
+                                        color: ${color};
+                                        font-weight: ${fontWeight};
+                                        text-align: ${textAlign};
+                                        display: flex;
+                                        align-items: center;
+                                        ${textAlign === 'center' ? 'justify-content: center;' : ''}
+                                    ">
+                                        ${element.content}
+                                    </div>
+                                `;
+                                break;
+                                
+                            case 'chart':
+                                slideHTML += `
+                                    <div style="
+                                        position: absolute;
+                                        left: ${opts.x || 10}%;
+                                        top: ${opts.y || 20}%;
+                                        width: ${opts.w || 80}%;
+                                        height: ${opts.h || 60}%;
+                                        background: white;
+                                        border: 1px solid #ddd;
+                                        border-radius: 5px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        flex-direction: column;
+                                    ">
+                                        <canvas id="chart_${index}_${Math.random().toString(36).substr(2, 9)}" width="400" height="300"></canvas>
+                                        <p style="margin-top: 10px; color: #666; font-size: 14px;">${element.chartOptions?.title || 'チャート'}</p>
+                                    </div>
+                                `;
+                                break;
+                                
+                            case 'table':
+                                let tableHTML = '<table style="width: 100%; border-collapse: collapse;">';
+                                element.data.forEach((row, rowIndex) => {
+                                    tableHTML += '<tr>';
+                                    row.forEach(cell => {
+                                        const cellData = typeof cell === 'string' ? { text: cell, options: {} } : cell;
+                                        const cellStyle = cellData.options || {};
+                                        const bgColor = cellStyle.fill ? `#${cellStyle.fill}` : '';
+                                        const textColor = cellStyle.color ? `#${cellStyle.color}` : '';
+                                        const isHeader = rowIndex === 0;
+                                        
+                                        tableHTML += `
+                                            <${isHeader ? 'th' : 'td'} style="
+                                                border: 1px solid #ccc;
+                                                padding: 8px;
+                                                background-color: ${bgColor};
+                                                color: ${textColor};
+                                                font-weight: ${cellStyle.bold ? 'bold' : 'normal'};
+                                                text-align: center;
+                                            ">
+                                                ${cellData.text}
+                                            </${isHeader ? 'th' : 'td'}>
+                                        `;
+                                    });
+                                    tableHTML += '</tr>';
+                                });
+                                tableHTML += '</table>';
+                                
+                                slideHTML += `
+                                    <div style="
+                                        position: absolute;
+                                        left: ${opts.x || 10}%;
+                                        top: ${opts.y || 20}%;
+                                        width: ${opts.w || 80}%;
+                                        height: ${opts.h || 60}%;
+                                        overflow: auto;
+                                    ">
+                                        ${tableHTML}
+                                    </div>
+                                `;
+                                break;
+                                
+                            case 'shape':
+                                const shapeStyle = element.style || {};
+                                const fillColor = shapeStyle.fill?.color ? `#${shapeStyle.fill.color}` : '#cccccc';
+                                const borderColor = shapeStyle.line?.color ? `#${shapeStyle.line.color}` : '#000000';
+                                const borderWidth = shapeStyle.line?.width || 1;
+                                const borderRadius = element.shapeType === 'roundRect' ? '10px' : '0';
+                                
+                                slideHTML += `
+                                    <div style="
+                                        position: absolute;
+                                        left: ${opts.x || 10}%;
+                                        top: ${opts.y || 20}%;
+                                        width: ${opts.w || 20}%;
+                                        height: ${opts.h || 15}%;
+                                        background-color: ${fillColor};
+                                        border: ${borderWidth}px solid ${borderColor};
+                                        border-radius: ${borderRadius};
+                                    ">
+                                    </div>
+                                `;
+                                break;
+                        }
+                    });
+                    
+                    slideHTML += '</div>';
+                    
+                    currentSlides.push({
+                        title: slideData.topic || `スライド ${index + 1}`,
+                        content: slideHTML
+                    });
+                });
+                
+                currentSlideIndex = 0;
+                updateSlide();
+                showPreviewModal(`JSONプレビュー - ${jsonData.title}`);
+                
+            } catch (error) {
+                showValidationResult('danger', `プレビュー生成エラー: ${error.message}`);
+            }
+        }
+        
+        // JSONからPPTX生成
+        function generateFromJSON() {
+            if (!validateJSON()) return;
+            
+            try {
+                const jsonData = JSON.parse(document.getElementById('jsonInput').value);
+                let pptx = new PptxGenJS();
+                
+                // プレゼンテーション設定
+                if (jsonData.layout) pptx.layout = jsonData.layout;
+                if (jsonData.title) pptx.title = jsonData.title;
+                if (jsonData.author) pptx.author = jsonData.author;
+                if (jsonData.company) pptx.company = jsonData.company;
+                
+                // 各スライドを生成
+                jsonData.slides.forEach(slideData => {
+                    let slide = pptx.addSlide();
+                    
+                    // 背景設定
+                    if (slideData.background) {
+                        if (typeof slideData.background === 'string') {
+                            slide.background = { color: slideData.background.replace('#', '') };
+                        } else if (slideData.background.type === 'gradient') {
+                            // グラデーション背景（図形で代替）
+                            slide.addShape(pptx.ShapeType.rect, {
+                                x: 0, y: 0, w: '100%', h: '100%',
+                                fill: { color: slideData.background.colors[0] }
+                            });
+                        }
+                    }
+                    
+                    // 各要素を追加
+                    slideData.elements.forEach(element => {
+                        const opts = element.options || {};
+                        const style = element.style || {};
+                        
+                        // 座標の正規化（%を0-100のスケールで処理）
+                        const normalizeCoord = (value, isPercentage = false) => {
+                            if (typeof value === 'string' && value.includes('%')) {
+                                return parseFloat(value) / 100 * (isPercentage ? 100 : 10);
+                            }
+                            return typeof value === 'number' ? value / 10 : value;
+                        };
+                        
+                        const position = {
+                            x: normalizeCoord(opts.x),
+                            y: normalizeCoord(opts.y),
+                            w: normalizeCoord(opts.w),
+                            h: normalizeCoord(opts.h)
+                        };
+                        
+                        switch (element.type) {
+                            case 'text':
+                                const textOptions = {
+                                    ...position,
+                                    fontSize: style.fontSize || 16,
+                                    color: style.color || '000000',
+                                    bold: style.bold || false,
+                                    align: style.align || 'left',
+                                    valign: style.valign || 'top'
+                                };
+                                
+                                slide.addText(element.content, textOptions);
+                                break;
+                                
+                            case 'chart':
+                                const chartData = element.data || [];
+                                const chartOptions = {
+                                    ...position,
+                                    title: element.chartOptions?.title || '',
+                                    showValue: element.chartOptions?.showValue || false,
+                                    showLegend: element.chartOptions?.showLegend !== false,
+                                    chartColors: element.chartOptions?.chartColors || ['4285F4', '34A853', 'FBBC04', 'EA4335']
+                                };
+                                
+                                if (chartData.length > 0) {
+                                    slide.addChart(element.chartType || 'bar', chartData, chartOptions);
+                                }
+                                break;
+                                
+                            case 'table':
+                                const tableOptions = {
+                                    ...position,
+                                    border: element.tableOptions?.border || { type: 'solid', pt: 1, color: 'CCCCCC' },
+                                    fontSize: element.tableOptions?.fontSize || 12,
+                                    align: element.tableOptions?.align || 'center'
+                                };
+                                
+                                slide.addTable(element.data || [], tableOptions);
+                                break;
+                                
+                            case 'shape':
+                                const shapeType = element.shapeType || 'rect';
+                                const shapeOptions = {
+                                    ...position,
+                                    fill: element.style?.fill || { color: 'CCCCCC' },
+                                    line: element.style?.line || { color: '000000', width: 1 }
+                                };
+                                
+                                if (element.style?.rectRadius) {
+                                    shapeOptions.rectRadius = element.style.rectRadius;
+                                }
+                                
+                                slide.addShape(pptx.ShapeType[shapeType] || pptx.ShapeType.rect, shapeOptions);
+                                break;
+                                
+                            case 'image':
+                                const imageOptions = {
+                                    ...position,
+                                    path: element.path,
+                                    data: element.data,
+                                    sizing: element.sizing,
+                                    transparency: element.transparency || 0,
+                                    rotate: element.rotate || 0,
+                                    flipH: element.flipH || false,
+                                    flipV: element.flipV || false
+                                };
+                                
+                                if (element.path || element.data) {
+                                    slide.addImage(imageOptions);
+                                }
+                                break;
+                        }
+                    });
+                });
+                
+                const fileName = `${jsonData.title || 'JSON-Generated-Presentation'}.pptx`;
+                pptx.writeFile({ fileName: fileName });
+                
+                showValidationResult('success', `✅ PPTX生成完了: ${fileName}`);
+                
+            } catch (error) {
+                showValidationResult('danger', `PPTX生成エラー: ${error.message}`);
+            }
+        }
+        
+        // 高度な機能のプレビュー・生成
+        function previewAdvanced(type) {
+            currentType = 'advanced';
+            currentSubType = type;
+            currentSlides = [];
+            
+            switch(type) {
+                case 'shapes':
+                    currentSlides.push({
+                        title: '高度な図形機能',
+                        content: `
+                            <div style="padding: 20px;">
+                                <h2 class="mb-4">高度な図形機能</h2>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 300px;">
+                                    <div style="text-align: center;">
+                                        <h4>カスタムジオメトリ</h4>
+                                        <svg width="200" height="150" style="border: 1px solid #ddd;">
+                                            <path d="M 50 50 L 150 50 Q 180 50 180 80 L 180 120 Q 180 150 150 150 L 50 150 Q 20 150 20 120 L 20 80 Q 20 50 50 50 Z" 
+                                                  fill="#4285F4" stroke="#1565C0" stroke-width="2"/>
+                                            <circle cx="100" cy="100" r="20" fill="#34A853" opacity="0.8"/>
+                                        </svg>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <h4>影効果・グラデーション</h4>
+                                        <div style="
+                                            width: 120px; height: 80px; margin: 20px auto;
+                                            background: linear-gradient(45deg, #667eea, #764ba2);
+                                            border-radius: 10px;
+                                            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+                                            display: flex; align-items: center; justify-content: center;
+                                            color: white; font-weight: bold;
+                                        ">
+                                            グラデーション
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    });
+                    break;
+                    
+                case 'images':
+                    currentSlides.push({
+                        title: '画像処理機能',
+                        content: `
+                            <div style="padding: 20px;">
+                                <h2 class="mb-4">画像処理機能</h2>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                                    <div style="text-align: center;">
+                                        <h5>リサイズ・クロッピング</h5>
+                                        <div style="width: 100px; height: 60px; margin: 10px auto; background: #f0f0f0; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px;">
+                                            CROP
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <h5>透明度・回転</h5>
+                                        <div style="width: 80px; height: 80px; margin: 10px auto; background: #4285F4; opacity: 0.5; transform: rotate(25deg); border-radius: 50%;"></div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <h5>SVGサポート</h5>
+                                        <svg width="80" height="80" style="margin: 10px auto;">
+                                            <polygon points="40,5 75,35 60,70 20,70 5,35" fill="#34A853"/>
+                                            <text x="40" y="45" text-anchor="middle" fill="white" font-size="12">SVG</text>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    });
+                    break;
+                    
+                case 'charts':
+                    currentSlides.push({
+                        title: '高度なチャート機能',
+                        content: `
+                            <div style="padding: 20px;">
+                                <h2 class="mb-4">高度なチャート機能</h2>
+                                <div style="display: flex; justify-content: space-around; height: 250px; align-items: center;">
+                                    <div style="text-align: center;">
+                                        <h5>3Dチャート</h5>
+                                        <canvas id="advanced3DChart" width="150" height="150"></canvas>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <h5>マルチシリーズ</h5>
+                                        <canvas id="advancedMultiChart" width="150" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        `,
+                        init: () => {
+                            // 3Dチャートのサンプル
+                            const ctx3D = document.getElementById('advanced3DChart')?.getContext('2d');
+                            if (ctx3D) {
+                                new Chart(ctx3D, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ['A', 'B', 'C'],
+                                        datasets: [{
+                                            data: [10, 20, 15],
+                                            backgroundColor: ['#4285F4', '#34A853', '#FBBC04']
+                                        }]
+                                    },
+                                    options: { responsive: false, plugins: { legend: { display: false } } }
+                                });
+                            }
+                            
+                            // マルチシリーズチャート
+                            const ctxMulti = document.getElementById('advancedMultiChart')?.getContext('2d');
+                            if (ctxMulti) {
+                                new Chart(ctxMulti, {
+                                    type: 'line',
+                                    data: {
+                                        labels: ['Jan', 'Feb', 'Mar'],
+                                        datasets: [
+                                            { label: 'Series 1', data: [10, 15, 12], borderColor: '#4285F4', fill: false },
+                                            { label: 'Series 2', data: [8, 12, 18], borderColor: '#34A853', fill: false }
+                                        ]
+                                    },
+                                    options: { responsive: false }
+                                });
+                            }
+                        }
+                    });
+                    break;
+            }
+            
+            currentSlideIndex = 0;
+            updateSlide();
+            showPreviewModal(`高度な機能 - ${type}`);
+        }
+        
+        function generateAdvanced(type) {
+            let pptx = new PptxGenJS();
+            let slide = pptx.addSlide();
+            
+            switch(type) {
+                case 'shapes':
+                    // タイトル
+                    slide.addText('高度な図形機能デモ', { x: 1, y: 0.5, w: 8, h: 1, fontSize: 24, bold: true });
+                    
+                    // カスタムジオメトリ
+                    slide.addShape(pptx.ShapeType.custGeom, {
+                        x: 1, y: 2, w: 3, h: 2,
+                        points: [
+                            { x: 0, y: 0.5 },
+                            { x: 0.5, y: 0, curve: { type: 'quadratic', x1: 0.3, y1: 0.2 } },
+                            { x: 1, y: 0.5 },
+                            { x: 0.5, y: 1, curve: { type: 'quadratic', x1: 0.7, y1: 0.8 } },
+                            { close: true }
+                        ],
+                        fill: { color: '4285F4' },
+                        shadow: { type: 'outer', blur: 10, offset: 5, angle: 45, color: '000000', opacity: 0.3 }
+                    });
+                    
+                    // グラデーション図形
+                    slide.addShape(pptx.ShapeType.roundRect, {
+                        x: 5, y: 2, w: 3, h: 2,
+                        fill: { color: '667eea' },
+                        rectRadius: 0.3,
+                        shadow: { type: 'outer', blur: 15, offset: 8, angle: 135, color: '667eea', opacity: 0.5 }
+                    });
+                    
+                    break;
+                    
+                case 'images':
+                    slide.addText('画像処理機能デモ', { x: 1, y: 0.5, w: 8, h: 1, fontSize: 24, bold: true });
+                    
+                    // Base64サンプル画像（小さな青い正方形）
+                    const sampleImageData = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+                    
+                    // 通常の画像
+                    slide.addImage({
+                        data: sampleImageData,
+                        x: 1, y: 2, w: 2, h: 1.5
+                    });
+                    
+                    // 透明度付き画像
+                    slide.addImage({
+                        data: sampleImageData,
+                        x: 4, y: 2, w: 2, h: 1.5,
+                        transparency: 50
+                    });
+                    
+                    // 回転画像
+                    slide.addImage({
+                        data: sampleImageData,
+                        x: 7, y: 2, w: 2, h: 1.5,
+                        rotate: 45
+                    });
+                    
+                    break;
+                    
+                case 'charts':
+                    slide.addText('高度なチャート機能デモ', { x: 1, y: 0.5, w: 8, h: 1, fontSize: 24, bold: true });
+                    
+                    // 3Dバーチャート
+                    slide.addChart(pptx.ChartType.bar3D, [
+                        {
+                            name: '3Dデータ',
+                            labels: ['カテゴリA', 'カテゴリB', 'カテゴリC'],
+                            values: [30, 45, 25]
+                        }
+                    ], {
+                        x: 1, y: 2, w: 4, h: 3,
+                        title: '3Dバーチャート',
+                        chartColors: ['4285F4', '34A853', 'FBBC04'],
+                        showValue: true
+                    });
+                    
+                    // マルチシリーズラインチャート
+                    slide.addChart(pptx.ChartType.line, [
+                        {
+                            name: 'シリーズ1',
+                            labels: ['1月', '2月', '3月', '4月'],
+                            values: [10, 15, 12, 18]
+                        },
+                        {
+                            name: 'シリーズ2',
+                            labels: ['1月', '2月', '3月', '4月'],
+                            values: [8, 12, 16, 14]
+                        }
+                    ], {
+                        x: 5.5, y: 2, w: 4, h: 3,
+                        title: 'マルチシリーズチャート',
+                        showLegend: true,
+                        chartColors: ['EA4335', '34A853']
+                    });
+                    
+                    break;
+            }
+            
+            pptx.writeFile({ fileName: `advanced-${type}-demo.pptx` });
         }
     </script>
 </body>
