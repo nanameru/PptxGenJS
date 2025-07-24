@@ -223,6 +223,52 @@
             </div>
         </div>
 
+        <!-- JSON to PPTX コンバーター -->
+        <div class="template-category">
+            <h2 class="category-title">🚀 JSONからPPTX生成</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            📊
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">コンサルティング評価レポート</h5>
+                            <p class="card-text">JSONデータから自動生成されるコンサルティング評価レポート（テーブル機能の改善版テスト）</p>
+                            <button class="btn btn-demo" onclick="generateConsultingReport()">🔥 PPTX生成</button>
+                            <div class="code-preview">
+                                <strong>📁 含まれる内容:</strong><br>
+                                • 評価の背景とアプローチ（詳細テーブル）<br>
+                                • 評価フレームワークと成果<br>
+                                • 強み・弱み分析<br>
+                                • 根本課題の特定<br>
+                                • 推奨アクションプラン
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card template-card">
+                        <div class="template-image">
+                            ⚙️
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">テーブル生成の改善点</h5>
+                            <p class="card-text">元のコードで発生していたテーブル生成問題を修正した実装</p>
+                            <div class="code-preview">
+                                <strong>🔧 修正内容:</strong><br>
+                                • <code>element.data</code> プロパティ対応<br>
+                                • パーセンテージ座標の正確な変換<br>
+                                • スタイルとオプションの統合<br>
+                                • セル色処理の改善<br>
+                                • エラーハンドリングの強化
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- テーブルテンプレート -->
         <div class="template-category">
             <h2 class="category-title">📋 テーブル</h2>
@@ -2449,6 +2495,543 @@ pptx.writeFile({ fileName: 'quote-slide.pptx' });`);
             }
             
             pptx.writeFile({ fileName: `advanced-${type}-demo.pptx` });
+        }
+
+        // コンサルティング評価レポートのJSONからPPTX生成機能
+        function generateConsultingReport() {
+            const consultingJson = {
+                "title": "コンサルティング評価レポート：現状分析と戦略的提言",
+                "author": "AI Slide Generator",
+                "company": "AI-Powered Presentation System",
+                "slides": [
+                    {
+                        "slideIndex": 0,
+                        "topic": "評価の背景とアプローチ",
+                        "elements": [
+                            {
+                                "content": "事業価値を倍増させるDX評価：背景と戦略的アプローチ",
+                                "options": {
+                                    "h": 12,
+                                    "w": 90,
+                                    "x": 5,
+                                    "y": 5
+                                },
+                                "type": "text",
+                                "style": {
+                                    "align": "center",
+                                    "bold": true,
+                                    "color": "#1A365D",
+                                    "fontSize": 32
+                                },
+                                "textType": "title"
+                            },
+                            {
+                                "options": {
+                                    "h": 0.5,
+                                    "w": 60,
+                                    "x": 20,
+                                    "y": 18
+                                },
+                                "shapeType": "line",
+                                "type": "shape",
+                                "purpose": "divider",
+                                "style": {
+                                    "line": {
+                                        "color": "#4A90E2",
+                                        "width": 2
+                                    }
+                                }
+                            },
+                            {
+                                "data": [
+                                    [
+                                        {
+                                            "text": "評価項目",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#FFFFFF",
+                                                "fill": "#4A90E2"
+                                            }
+                                        },
+                                        {
+                                            "text": "測定指標 (KPI)",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#FFFFFF",
+                                                "fill": "#4A90E2"
+                                            }
+                                        },
+                                        {
+                                            "text": "従来型アプローチ",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#FFFFFF",
+                                                "fill": "#4A90E2"
+                                            }
+                                        },
+                                        {
+                                            "text": "提案データ駆動型アプローチ",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#FFFFFF",
+                                                "fill": "#4A90E2"
+                                            }
+                                        },
+                                        {
+                                            "text": "期待効果 (差分)",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#FFFFFF",
+                                                "fill": "#4A90E2"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "text": "効率性",
+                                            "options": {
+                                                "align": "left",
+                                                "bold": true
+                                            }
+                                        },
+                                        {
+                                            "text": "業務処理時間",
+                                            "options": {
+                                                "align": "left"
+                                            }
+                                        },
+                                        {
+                                            "text": "40時間/週",
+                                            "options": {
+                                                "align": "center"
+                                            }
+                                        },
+                                        {
+                                            "text": "26時間/週",
+                                            "options": {
+                                                "align": "center"
+                                            }
+                                        },
+                                        {
+                                            "text": "-35%",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#155724",
+                                                "fill": "#D4EDDA"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "text": "コスト",
+                                            "options": {
+                                                "align": "left",
+                                                "bold": true
+                                            }
+                                        },
+                                        {
+                                            "text": "導入・運用コスト",
+                                            "options": {
+                                                "align": "left"
+                                            }
+                                        },
+                                        {
+                                            "text": "500百万円/年",
+                                            "options": {
+                                                "align": "center"
+                                            }
+                                        },
+                                        {
+                                            "text": "400百万円/年",
+                                            "options": {
+                                                "align": "center",
+                                                "fill": "#D1ECF1"
+                                            }
+                                        },
+                                        {
+                                            "text": "-20%",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#155724",
+                                                "fill": "#D4EDDA"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "text": "リスク",
+                                            "options": {
+                                                "align": "left",
+                                                "bold": true
+                                            }
+                                        },
+                                        {
+                                            "text": "プロジェクト成功率*",
+                                            "options": {
+                                                "align": "left"
+                                            }
+                                        },
+                                        {
+                                            "text": "75%",
+                                            "options": {
+                                                "align": "center"
+                                            }
+                                        },
+                                        {
+                                            "text": "95%",
+                                            "options": {
+                                                "align": "center",
+                                                "fill": "#D1ECF1"
+                                            }
+                                        },
+                                        {
+                                            "text": "+20pt",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#155724",
+                                                "fill": "#D4EDDA"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "text": "ROI",
+                                            "options": {
+                                                "align": "left",
+                                                "bold": true
+                                            }
+                                        },
+                                        {
+                                            "text": "投資回収期間",
+                                            "options": {
+                                                "align": "left"
+                                            }
+                                        },
+                                        {
+                                            "text": "36ヶ月",
+                                            "options": {
+                                                "align": "center"
+                                            }
+                                        },
+                                        {
+                                            "text": "18ヶ月",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "fill": "#D1ECF1"
+                                            }
+                                        },
+                                        {
+                                            "text": "期間半減",
+                                            "options": {
+                                                "align": "center",
+                                                "bold": true,
+                                                "color": "#155724",
+                                                "fill": "#D4EDDA"
+                                            }
+                                        }
+                                    ]
+                                ],
+                                "options": {
+                                    "h": 50,
+                                    "w": 90,
+                                    "x": 5,
+                                    "y": 32
+                                },
+                                "type": "table",
+                                "colW": [15, 25, 20, 20, 20],
+                                "keyMessage": "データ駆動型アプローチにより、効率性、コスト、リスク、ROIの全指標で大幅な改善が見込まれます。",
+                                "notes": "* 出典: 業界ベンチマークレポート (Gartner)",
+                                "title": "アプローチ別 評価指標比較"
+                            }
+                        ],
+                        "background": "#F5F8FA"
+                    },
+                    {
+                        "slideIndex": 1,
+                        "topic": "評価フレームワークと評価軸",
+                        "elements": [
+                            {
+                                "content": "新評価フレームワークによる成果",
+                                "options": {
+                                    "h": 8,
+                                    "w": 90,
+                                    "x": 5,
+                                    "y": 4
+                                },
+                                "type": "text",
+                                "style": {
+                                    "align": "center",
+                                    "bold": true,
+                                    "color": "#1A365D",
+                                    "fontSize": 32
+                                },
+                                "textType": "title"
+                            },
+                            {
+                                "content": "Dynamic DXフレームワーク導入で主要KPIが大幅改善",
+                                "options": {
+                                    "h": 5,
+                                    "w": 90,
+                                    "x": 5,
+                                    "y": 12
+                                },
+                                "type": "text",
+                                "style": {
+                                    "align": "center",
+                                    "color": "#334E68",
+                                    "fontSize": 16
+                                },
+                                "textType": "subtitle"
+                            },
+                            {
+                                "options": {
+                                    "h": 50,
+                                    "w": 29,
+                                    "x": 4,
+                                    "y": 22
+                                },
+                                "shapeType": "roundedRectangle",
+                                "type": "shape",
+                                "purpose": "container",
+                                "style": {
+                                    "fill": {
+                                        "color": "#FFFFFF",
+                                        "type": "solid"
+                                    },
+                                    "shadow": {
+                                        "blur": 8,
+                                        "color": "#000000",
+                                        "opacity": 0.1,
+                                        "type": "outer"
+                                    }
+                                }
+                            }
+                        ],
+                        "background": "#F0F4F8"
+                    }
+                ]
+            };
+
+            generatePptxFromJson(consultingJson);
+        }
+
+        // JSON構造からPPTX生成するメイン関数
+        function generatePptxFromJson(jsonData) {
+            console.log('🚀 PPTX生成開始:', jsonData.title);
+            
+            const pptx = new PptxGenJS();
+            
+            // プレゼンテーション設定
+            if (jsonData.title) pptx.title = jsonData.title;
+            if (jsonData.author) pptx.author = jsonData.author;
+            if (jsonData.company) pptx.company = jsonData.company;
+            if (jsonData.layout) pptx.layout = jsonData.layout;
+            
+            // スライド生成
+            jsonData.slides.forEach((slideData, slideIndex) => {
+                console.log(`📄 スライド ${slideIndex + 1} 生成中...`);
+                
+                const slide = pptx.addSlide();
+                
+                // 背景設定
+                if (slideData.background) {
+                    const bgColor = slideData.background.startsWith('#') ? 
+                        slideData.background.substring(1) : slideData.background;
+                    slide.background = { color: bgColor };
+                }
+                
+                // 要素追加
+                if (slideData.elements && Array.isArray(slideData.elements)) {
+                    slideData.elements.forEach((element, elementIndex) => {
+                        try {
+                            addElementToSlide(slide, element, elementIndex);
+                        } catch (error) {
+                            console.error(`❌ 要素 ${elementIndex} 処理エラー:`, error);
+                        }
+                    });
+                }
+            });
+            
+            // PPTX生成・ダウンロード
+            const fileName = `${jsonData.title || 'generated-presentation'}.pptx`;
+            pptx.writeFile({ fileName: fileName });
+            console.log(`✅ PPTX生成完了: ${fileName}`);
+        }
+
+        // 個別要素をスライドに追加する関数
+        function addElementToSlide(slide, element, elementIndex) {
+            console.log(`🔧 要素 ${elementIndex} 処理中: ${element.type}`);
+            
+            // 座標変換（パーセンテージからインチへ）
+            const convertCoords = (options) => {
+                if (!options) return {};
+                
+                const converted = { ...options };
+                
+                // パーセンテージをインチに変換（スライド幅10インチ、高さ5.625インチ）
+                if (typeof options.x === 'number') converted.x = (options.x / 100) * 10;
+                if (typeof options.y === 'number') converted.y = (options.y / 100) * 5.625;
+                if (typeof options.w === 'number') converted.w = (options.w / 100) * 10;
+                if (typeof options.h === 'number') converted.h = (options.h / 100) * 5.625;
+                
+                return converted;
+            };
+            
+            // スタイル統合（styleとoptionsをマージ）
+            const mergeStyle = (options, style) => {
+                if (!style) return options;
+                
+                const merged = { ...options };
+                
+                // カラー処理（#を除去）
+                if (style.color) {
+                    merged.color = style.color.startsWith('#') ? style.color.substring(1) : style.color;
+                }
+                if (style.fill && typeof style.fill === 'string') {
+                    merged.fill = { color: style.fill.startsWith('#') ? style.fill.substring(1) : style.fill };
+                } else if (style.fill && style.fill.color) {
+                    merged.fill = { color: style.fill.color.startsWith('#') ? style.fill.color.substring(1) : style.fill.color };
+                }
+                
+                // その他のスタイル
+                if (style.fontSize) merged.fontSize = style.fontSize;
+                if (style.bold) merged.bold = style.bold;
+                if (style.italic) merged.italic = style.italic;
+                if (style.align) merged.align = style.align;
+                if (style.valign) merged.valign = style.valign;
+                
+                // ライン処理
+                if (style.line) {
+                    merged.line = { ...style.line };
+                    if (merged.line.color) {
+                        merged.line.color = merged.line.color.startsWith('#') ? 
+                            merged.line.color.substring(1) : merged.line.color;
+                    }
+                }
+                
+                return merged;
+            };
+            
+            const coords = convertCoords(element.options);
+            const finalOptions = mergeStyle(coords, element.style);
+            
+            switch (element.type) {
+                case 'text':
+                    slide.addText(element.content || '', finalOptions);
+                    break;
+                    
+                case 'shape':
+                    const shapeMap = {
+                        'line': 'line',
+                        'rect': 'rect',
+                        'oval': 'oval',
+                        'roundedRectangle': 'roundRect',
+                        'triangle': 'triangle',
+                        'rightTriangle': 'triangle',
+                        'arc': 'arc',
+                        'chevron': 'chevron',
+                        'pentagon': 'pentagon',
+                        'hexagon': 'hexagon',
+                        'octagon': 'octagon',
+                        'cloud': 'cloud',
+                        'heart': 'heart',
+                        'pie': 'pie'
+                    };
+                    
+                    const shapeType = shapeMap[element.shapeType] || element.shapeType;
+                    slide.addShape(shapeType, finalOptions);
+                    break;
+                    
+                case 'table':
+                    // テーブルデータ処理の改善
+                    const tableData = element.data || element.tableRows || [];
+                    
+                    if (!tableData || tableData.length === 0) {
+                        console.warn(`⚠️ テーブルデータが空です (要素 ${elementIndex})`);
+                        break;
+                    }
+                    
+                    // テーブルオプション設定
+                    const tableOptions = { ...finalOptions };
+                    
+                    // 列幅設定
+                    if (element.colW && Array.isArray(element.colW)) {
+                        tableOptions.colW = element.colW.map(w => (w / 100) * 10);
+                    }
+                    
+                    // テーブルデータの正規化
+                    const processedTableData = tableData.map((row, rowIndex) => {
+                        if (!Array.isArray(row)) {
+                            console.warn(`⚠️ 行 ${rowIndex} が配列ではありません:`, row);
+                            return [];
+                        }
+                        
+                        return row.map((cell, cellIndex) => {
+                            if (typeof cell === 'string') {
+                                return { text: cell, options: {} };
+                            }
+                            
+                            if (cell && typeof cell === 'object') {
+                                const cellOptions = { ...(cell.options || {}) };
+                                
+                                // セルの色処理
+                                if (cellOptions.color) {
+                                    cellOptions.color = cellOptions.color.startsWith('#') ? 
+                                        cellOptions.color.substring(1) : cellOptions.color;
+                                }
+                                if (cellOptions.fill) {
+                                    if (typeof cellOptions.fill === 'string') {
+                                        cellOptions.fill = { 
+                                            color: cellOptions.fill.startsWith('#') ? 
+                                                cellOptions.fill.substring(1) : cellOptions.fill 
+                                        };
+                                    } else if (cellOptions.fill.color) {
+                                        cellOptions.fill.color = cellOptions.fill.color.startsWith('#') ? 
+                                            cellOptions.fill.color.substring(1) : cellOptions.fill.color;
+                                    }
+                                }
+                                
+                                return {
+                                    text: cell.text || '',
+                                    options: cellOptions
+                                };
+                            }
+                            
+                            return { text: String(cell || ''), options: {} };
+                        });
+                    });
+                    
+                    console.log(`📊 テーブル処理完了 (${processedTableData.length}行)`);
+                    slide.addTable(processedTableData, tableOptions);
+                    break;
+                    
+                case 'image':
+                    slide.addImage({
+                        path: element.path || element.src || '',
+                        ...finalOptions
+                    });
+                    break;
+                    
+                case 'chart':
+                    slide.addChart(
+                        element.chartType,
+                        element.chartSeries || element.data || [],
+                        finalOptions
+                    );
+                    break;
+                    
+                default:
+                    console.warn(`⚠️ 未対応の要素タイプ: ${element.type}`);
+            }
         }
     </script>
 </body>

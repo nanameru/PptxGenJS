@@ -103,6 +103,12 @@ function genSlide01(pptx) {
 
 	// TEST `getExcelColName()` to ensure Excel Column names are generated correctly above >26 chars/cols
 	slide.addChart(pptx.charts.BAR, dataChartBar8Series, optsChart);
+
+	// スライド1: 初期状態
+	slide.addShape(pptx.shapes.CIRCLE, {
+		x: 1, y: 3, w: 1, h: 1,
+		fill: { color: 'FF0000' }
+	});
 }
 
 // SLIDE 2: Bar Chart: Various Designs
@@ -269,6 +275,12 @@ function genSlide02(pptx) {
 		titleColor: COLORS_ACCENT[0],
 	};
 	slide.addChart(pptx.charts.BAR, dataChartBar3Series, optsChartBar4);
+
+	// スライド2: 移動後の状態  
+	slide.addShape(pptx.shapes.CIRCLE, {
+		x: 3, y: 3, w: 1, h: 1,
+		fill: { color: 'FF0000' }
+	});
 }
 
 // SLIDE 3: Bar Chart Options: Axis, DataLabel, Grid
@@ -435,6 +447,12 @@ function genSlide03(pptx) {
 		showTitle: false,
 	};
 	slide.addChart(pptx.charts.BAR, arrDataHighVals, optsChartBar4);
+
+	// スライド3: 拡大状態
+	slide.addShape(pptx.shapes.CIRCLE, {
+		x: 2.5, y: 2.5, w: 2, h: 2,
+		fill: { color: 'FF0000' }
+	});
 }
 
 // SLIDE 4: Bar Chart: Stacked
